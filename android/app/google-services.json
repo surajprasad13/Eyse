@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "518445992558",
+    "project_id": "b2c-project-bc6cd",
+    "storage_bucket": "b2c-project-bc6cd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:518445992558:android:3ef4b5d6f882a072c8347f",
+        "android_client_info": {
+          "package_name": "com.eyse"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "518445992558-l4enjl543dmlnliicc9umnt4hq7aub4l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.eyse",
+            "certificate_hash": "77a4ec6c0a12ccff78a354fe29c2cdc15f88d89c"
+          }
+        },
+        {
+          "client_id": "518445992558-m6a8e9so5gs1kci0jnn8ecm7203tgm21.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTyRXUlsfOA_Xk0z9-53P8p_MeVEqc5es"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "518445992558-m6a8e9so5gs1kci0jnn8ecm7203tgm21.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "518445992558-a9c1i59oqd5k2m9tk1dtvco9a6ic7cjg.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.eyse"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

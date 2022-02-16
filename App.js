@@ -7,7 +7,7 @@ import {fonts} from './src/theme';
 const App = () => {
   return (
     <SafeAreaView>
-      <Text style={{fontFamily: fonts.regular}}>Hello world</Text>
+      <Text style={{fontFamily: fonts.gothRegular}}>Hello world</Text>
     </SafeAreaView>
   );
 };
