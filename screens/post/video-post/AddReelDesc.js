@@ -1,0 +1,235 @@
+import React from 'react';
+import {
+  SafeAreaView,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  Dimensions,
+  FlatList,
+  TextInput,
+  ScrollView,
+  ActivityIndicator,
+} from 'react-native';
+import styles from '../styles';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {UserPost} from '../../../axios';
+import axios from 'axios';
+
+const width = Dimensions.get('window').width;
+const height = Dimensions.get('window').height;
+
+export default class AddReelDesc extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedVideo: this.props.route.params.selectedVideo,
+      coverImage: '',
+      desc: '',
+      tags: '',
+      tagList: this.props.route.params.tagList,
+      loading: false,
+      token: null,
+      url: '',
+    };
+  }
+  publishValidation = () => {
+    if (this.state.desc != '' && this.state.tags != '') {
+      return true;
+    } else return false;
+  };
+  async componentDidMount() {
+    console.log(this.state.tagList);
+    const user = JSON.parse(await AsyncStorage.getItem('userToken'));
+    if (user != null) {
+      this.setState({token: user});
+    }
+
+    UserPost.getHashtags()
+      .then(res => {
+        console.log(res.data);
+      })
+      .catch(error => {
+        console.log(error.response);
+      });
+  }
+  onSubmit = () => {
+    this.setState({loading: true});
+    let uri = this.state.selectedVideo.toString();
+    let filename = uri.split('/').pop();
+    let match = /\.(\w+)$/.exec(filename);
+    let type = match ? `image/${match[1]}` : `image`;
+
+    let formdata = new FormData();
+    formdata.append('content', {
+      uri: uri,
+      name: filename,
+      type: type,
+    });
+
+    UserPost.uploadFile(formdata)
+      .then(res => {
+        this.setState({url: res.data.url});
+
+        axios
+          .post(
+            'http://18.190.154.188:9000/inflncr/addInfluencerPosts',
+
+            {
+              type: 'VIDEO',
+              description:
+                'https://featureventures-storage.s3.us-east-2.amazonaws.com/images/1635358998782gLYYZnSeA.mp4',
+              caption: this.state.desc,
+              hashtags: ['ggfddf', 'gffgfdg', 'gfdgfd', 'gdfgfd'],
+              data: [
+                {
+                  name: 'BERG-SAL-6622_1.jpg',
+                  url: this.state.url,
+                },
+              ],
+              products: [
+                {
+                  name: 'sun glasses',
+                  brand_name: 'Raybon',
+                  color: 'Red',
+                  size: 'XXL',
+                  category: 'Wearable',
+                  sub_category: 'Glasses',
+                },
+                {
+                  name: 'T- shirt',
+                  brand_name: 'Raybon',
+                  color: 'Red',
+                  size: 'XXL',
+                  category: 'Clothings',
+                  sub_category: 'T-shirt',
+                },
+              ],
+            },
+            {
+              headers: {
+                Authorization: this.state.token,
+                'Content-Type': 'application/json',
+              },
+            },
+          )
+          .then(async response => {
+            console.log(response.data);
+            if (response.status == 200) {
+              this.props.navigation.navigate('ProfileTabNavigator');
+            }
+          })
+          .catch(function (error) {
+            console.log(error.response);
+          });
+      })
+      .catch(error => {
+        console.log(error.response);
+      });
+  };
+  render() {
+    return (
+      <ScrollView style={{...styles.container, backgroundColor: '#011E46'}}>
+        <SafeAreaView style={{...styles.headerWrapper}}>
+          <TouchableOpacity
+            onPress={() => {
+              this.props.navigation.goBack();
+            }}>
+            <Ionicons name="chevron-back" size={24} color="white" />
+          </TouchableOpacity>
+          <Text
+            style={{
+              ...styles.primaryLTextBold,
+              marginLeft: 10,
+              color: 'white',
+            }}>
+            Create a new post
+          </Text>
+        </SafeAreaView>
+
+        <View style={{flex: 1, margin: 30}}>
+          <View style={{...styles.row, justifyContent: 'space-between'}}>
+            <Text style={{...styles.primaryMTextBold, color: '#99A5B5'}}>
+              Add description
+            </Text>
+            <Text style={{...styles.primaryMTextBold, color: '#99A5B5'}}>
+              3/3
+            </Text>
+          </View>
+
+          <TextInput
+            style={{
+              height: height / 2,
+              backgroundColor: '#1A3458',
+              borderRadius: 5,
+              padding: 10,
+              fontSize: 16,
+              marginVertical: 10,
+              textAlignVertical: 'top',
+              ...styles.secondarySText,
+              color: '#677890',
+            }}
+            multiline={true}
+            onChangeText={text => {
+              this.setState({desc: text});
+            }}
+            placeholder="Write something..."
+            placeholderTextColor="#677890"
+          />
+
+          <Text
+            style={{
+              ...styles.primaryMTextBold,
+              marginVertical: 10,
+              color: '#99A5B5',
+            }}>
+            Tags
+          </Text>
+          <TextInput
+            onChangeText={text => {
+              this.setState({tags: text});
+            }}
+            style={{
+              backgroundColor: '#1A3458',
+              borderRadius: 5,
+              padding: 10,
+              ...styles.secondarySText,
+              color: '#677890',
+            }}
+            placeholder="Enter hashtags here"
+            placeholderTextColor="#677890"
+          />
+
+          <TouchableOpacity
+            disabled={this.state.loading ? true : false}
+            onPress={() => {
+              this.onSubmit();
+            }}
+            style={{
+              ...styles.submitBtnWrapper,
+              paddingVertical: 10,
+              marginVertical: 30,
+              backgroundColor: '#011E46',
+              borderColor: '#99A5B5',
+              borderWidth: 0.2,
+              opacity: this.state.loading && 0.5,
+            }}>
+            {this.state.loading ? (
+              <ActivityIndicator size="small" color="white" />
+            ) : (
+              <Text
+                style={{
+                  ...styles.primaryMTextBold,
+                  color: 'white',
+                  textAlign: 'center',
+                }}>
+                Publish
+              </Text>
+            )}
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+    );
+  }
+}
