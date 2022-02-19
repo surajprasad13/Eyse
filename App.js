@@ -13,7 +13,6 @@ import {store} from './store';
 class App extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       fontLoaded: false,
       userToken: '',
