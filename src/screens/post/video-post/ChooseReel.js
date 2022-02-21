@@ -79,6 +79,7 @@ export default class ChooseReel extends React.Component {
                 }}
                 style={{alignItems: 'center', width: width - 60}}>
                 <Video
+                  paused={true}
                   style={{
                     alignSelf: 'center',
                     width: width - 60,

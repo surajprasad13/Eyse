@@ -114,6 +114,7 @@ export default class ExpertContentList extends React.Component {
                 </Text>
                 <View>
                   <Video
+                    paused={true}
                     style={{
                       alignSelf: 'center',
                       width: width / 1.5,

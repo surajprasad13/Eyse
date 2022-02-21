@@ -1,16 +1,16 @@
-import React from "react";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import React from 'react';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-import OnBoarding from "../screens/onboarding/OnBoarding";
-import Login from "../screens/onboarding/Login";
-import SignUp from "../screens/onboarding/SignUp";
-import ForgotPassword from "../screens/onboarding/ForgotPassword";
-import NewPassword from "../screens/onboarding/NewPassword";
-import Success from "../constants/Success";
-import Interests from "../screens/onboarding/Interests";
-import RootStackNavigation from "./RootStackNavigation";
-import ProfileTabNavigator from "../screens/influencers-profile/ProfileTabNavigator";
-import HomeStack from "./HomeStack";
+import OnBoarding from '../screens/onboarding/OnBoarding';
+import Login from '../screens/onboarding/Login';
+import SignUp from '../screens/onboarding/SignUp';
+import ForgotPassword from '../screens/onboarding/ForgotPassword';
+import NewPassword from '../screens/onboarding/NewPassword';
+import Success from '../constants/Success';
+import Interests from '../screens/onboarding/Interests';
+import RootStackNavigation from './RootStackNavigation';
+import ProfileTabNavigator from '../screens/influencers-profile/ProfileTabNavigator';
+import HomeStack from './HomeStack';
 
 const Stack = createNativeStackNavigator();
 
@@ -25,8 +25,7 @@ export default class AuthStack extends React.Component {
         initialRouteName="OnBoarding"
         screenOptions={{
           headerShown: false,
-        }}
-      >
+        }}>
         <Stack.Screen name="OnBoarding" component={OnBoarding} />
         <Stack.Screen
           name="RootStackNavigation"

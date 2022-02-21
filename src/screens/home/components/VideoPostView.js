@@ -58,6 +58,7 @@ export default class VideoPostView extends React.Component {
         <View>
           <View style={{backgroundColor: 'black'}}>
             <Video
+              paused={true}
               style={{
                 alignSelf: 'center',
                 width: width - 2,

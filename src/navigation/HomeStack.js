@@ -1,36 +1,36 @@
-import React from "react";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import React from 'react';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-import ProfileScreen from "../screens/influencers-profile/ProfileScreen";
-import AboutUser from "../screens/influencers-profile/AboutUser";
-import Book from "../screens/user-booking/Book";
-import ConfirmBook from "../screens/user-booking/ConfirmBook";
-import ExpertContentList from "../screens/expert-advice/ExpertContentList";
-import ExpertCategoryList from "../screens/expert-advice/ExpertCategoryList";
-import ExpertList from "../screens/expert-advice/ExpertList";
-import BecomeInfluencer from "../screens/influencer-onboarding/BecomeInfluencer";
-import FillForm from "../screens/influencer-onboarding/FillForm";
-import ProfileTabNavigator from "../screens/influencers-profile/ProfileTabNavigator";
-import EditProfile from "../screens/influencers-profile/EditProfile";
-import PostType from "../screens/post/PostType";
-import ChooseImage from "../screens/post/image-post/ChooseImage";
-import TagProducts from "../screens/post/image-post/TagProdcuts";
-import AddDesc from "../screens/post/image-post/AddDesc";
-import FullView from "../screens/influencers-profile/FullView";
-import VideoType from "../screens/post/video-post/VideoType";
-import ChooseVideo from "../screens/post/video-post/ChooseVideo";
-import TagVideoProducts from "../screens/post/video-post/TagVideoProducts";
-import AddVideoDesc from "../screens/post/video-post/AddVideoDesc";
-import ChooseReel from "../screens/post/video-post/ChooseReel";
-import TagReelProducts from "../screens/post/video-post/TagReelProducts";
-import AddReelDesc from "../screens/post/video-post/AddReelDesc";
-import TextPost from "../screens/post/text-post/TextPost";
-import HomeTabNavigator from "./HomeTabNavigator";
-import YourBooking from "../screens/user-booking/YourBooking";
-import BookingDetail from "../screens/user-booking/BookingDetail";
-import CameraSearch from "../screens/home/components/CameraSearch";
-import InfluencerSideBookings from "../screens/user-booking/InfluencerSideBookings";
-import UserSideDetails from "../screens/user-booking/UserSideDetails";
+import ProfileScreen from '../screens/influencers-profile/ProfileScreen';
+import AboutUser from '../screens/influencers-profile/AboutUser';
+import Book from '../screens/user-booking/Book';
+import ConfirmBook from '../screens/user-booking/ConfirmBook';
+import ExpertContentList from '../screens/expert-advice/ExpertContentList';
+import ExpertCategoryList from '../screens/expert-advice/ExpertCategoryList';
+import ExpertList from '../screens/expert-advice/ExpertList';
+import BecomeInfluencer from '../screens/influencer-onboarding/BecomeInfluencer';
+import FillForm from '../screens/influencer-onboarding/FillForm';
+import ProfileTabNavigator from '../screens/influencers-profile/ProfileTabNavigator';
+import EditProfile from '../screens/influencers-profile/EditProfile';
+import PostType from '../screens/post/PostType';
+import ChooseImage from '../screens/post/image-post/ChooseImage';
+import TagProducts from '../screens/post/image-post/TagProdcuts';
+import AddDesc from '../screens/post/image-post/AddDesc';
+import FullView from '../screens/influencers-profile/FullView';
+import VideoType from '../screens/post/video-post/VideoType';
+import ChooseVideo from '../screens/post/video-post/ChooseVideo';
+import TagVideoProducts from '../screens/post/video-post/TagVideoProducts';
+import AddVideoDesc from '../screens/post/video-post/AddVideoDesc';
+import ChooseReel from '../screens/post/video-post/ChooseReel';
+import TagReelProducts from '../screens/post/video-post/TagReelProducts';
+import AddReelDesc from '../screens/post/video-post/AddReelDesc';
+import TextPost from '../screens/post/text-post/TextPost';
+import HomeTabNavigator from './HomeTabNavigator';
+import YourBooking from '../screens/user-booking/YourBooking';
+import BookingDetail from '../screens/user-booking/BookingDetail';
+import CameraSearch from '../screens/home/components/CameraSearch';
+import InfluencerSideBookings from '../screens/user-booking/InfluencerSideBookings';
+import UserSideDetails from '../screens/user-booking/UserSideDetails';
 
 const Stack = createNativeStackNavigator();
 
@@ -41,8 +41,7 @@ export default class HomeStack extends React.Component {
         initialRouteName="HomeTabNavigator"
         screenOptions={{
           headerShown: false,
-        }}
-      >
+        }}>
         <Stack.Screen name="HomeTabNavigator" component={HomeTabNavigator} />
         <Stack.Screen name="CameraSearch" component={CameraSearch} />
         <Stack.Screen name="ProfileScreen" component={ProfileScreen} />

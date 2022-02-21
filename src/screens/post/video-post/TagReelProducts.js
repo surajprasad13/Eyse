@@ -447,6 +447,7 @@ export default class TagReelProducts extends React.Component {
                   disabled={this.state.isSearchText}
                   style={{backgroundColor: 'black'}}>
                   <Video
+                    paused={true}
                     style={{
                       alignSelf: 'center',
                       width: width - 60,

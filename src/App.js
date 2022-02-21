@@ -9,6 +9,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {StatusBar} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {store} from './store';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 class App extends React.Component {
   constructor(props) {
@@ -29,12 +30,14 @@ class App extends React.Component {
   }
   render() {
     return (
-      <Provider store={store}>
-        <NavigationContainer>
-          <StatusBar barStyle="dark-content" backgroundColor="white" />
-          {this.state.isLogin ? <RootStackNavigation /> : <AuthStack />}
-        </NavigationContainer>
-      </Provider>
+      <SafeAreaProvider>
+        <Provider store={store}>
+          <NavigationContainer>
+            <StatusBar barStyle="dark-content" backgroundColor="white" />
+            {this.state.isLogin ? <RootStackNavigation /> : <AuthStack />}
+          </NavigationContainer>
+        </Provider>
+      </SafeAreaProvider>
     );
   }
 }

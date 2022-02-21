@@ -383,6 +383,7 @@ export default class YourProfile extends Component {
               <View>
                 {this.state.selectedTab == 2 ? (
                   <Video
+                    paused={true}
                     style={{
                       alignSelf: 'center',
                       width: width - 60,

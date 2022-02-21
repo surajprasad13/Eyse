@@ -12,11 +12,11 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		27B4988927BFBE2C00E618F7 /* DidactGothic-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 27F0B1BD27BFB99900D40DCC /* DidactGothic-Regular.ttf */; };
-		27B4988A27BFBE2C00E618F7 /* NotoSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 27F0B1BA27BFB99900D40DCC /* NotoSans-Bold.ttf */; };
-		27B4988B27BFBE2C00E618F7 /* NotoSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 27F0B1BC27BFB99900D40DCC /* NotoSans-BoldItalic.ttf */; };
-		27B4988C27BFBE2C00E618F7 /* NotoSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 27F0B1BE27BFB99900D40DCC /* NotoSans-Italic.ttf */; };
-		27B4988D27BFBE2C00E618F7 /* NotoSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 27F0B1BB27BFB99900D40DCC /* NotoSans-Regular.ttf */; };
+		27DCC5EC27C396E8009DF7D0 /* DidactGothic-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 27DCC5EB27C396E8009DF7D0 /* DidactGothic-Regular.ttf */; };
+		27DCC5F127C39788009DF7D0 /* NotoSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 27DCC5ED27C39788009DF7D0 /* NotoSans-Regular.ttf */; };
+		27DCC5F227C39788009DF7D0 /* NotoSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 27DCC5EE27C39788009DF7D0 /* NotoSans-Italic.ttf */; };
+		27DCC5F327C39788009DF7D0 /* NotoSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 27DCC5EF27C39788009DF7D0 /* NotoSans-Bold.ttf */; };
+		27DCC5F427C39788009DF7D0 /* NotoSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 27DCC5F027C39788009DF7D0 /* NotoSans-BoldItalic.ttf */; };
 		27F7F09827BCC9D700035C91 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 27F7F09727BCC9D700035C91 /* GoogleService-Info.plist */; };
 		37CD2A40D95A754FEA43DAB7 /* libPods-Eyse.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01DB2582382C30BEB718E341 /* libPods-Eyse.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
@@ -43,11 +43,11 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Eyse/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Eyse/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Eyse/main.m; sourceTree = "<group>"; };
-		27F0B1BA27BFB99900D40DCC /* NotoSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Bold.ttf"; sourceTree = "<group>"; };
-		27F0B1BB27BFB99900D40DCC /* NotoSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Regular.ttf"; sourceTree = "<group>"; };
-		27F0B1BC27BFB99900D40DCC /* NotoSans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-BoldItalic.ttf"; sourceTree = "<group>"; };
-		27F0B1BD27BFB99900D40DCC /* DidactGothic-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DidactGothic-Regular.ttf"; sourceTree = "<group>"; };
-		27F0B1BE27BFB99900D40DCC /* NotoSans-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Italic.ttf"; sourceTree = "<group>"; };
+		27DCC5EB27C396E8009DF7D0 /* DidactGothic-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DidactGothic-Regular.ttf"; sourceTree = "<group>"; };
+		27DCC5ED27C39788009DF7D0 /* NotoSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Regular.ttf"; sourceTree = "<group>"; };
+		27DCC5EE27C39788009DF7D0 /* NotoSans-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Italic.ttf"; sourceTree = "<group>"; };
+		27DCC5EF27C39788009DF7D0 /* NotoSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Bold.ttf"; sourceTree = "<group>"; };
+		27DCC5F027C39788009DF7D0 /* NotoSans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-BoldItalic.ttf"; sourceTree = "<group>"; };
 		27F7F09727BCC9D700035C91 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3423835E8EA89FA247945187 /* Pods-Eyse.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Eyse.debug.xcconfig"; path = "Target Support Files/Pods-Eyse/Pods-Eyse.debug.xcconfig"; sourceTree = "<group>"; };
 		3972EA564B244A17B6A90989 /* Pods-Eyse-EyseTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Eyse-EyseTests.debug.xcconfig"; path = "Target Support Files/Pods-Eyse-EyseTests/Pods-Eyse-EyseTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -133,11 +133,11 @@
 		729BE3F07FBC4E9BA714B78D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				27F0B1BD27BFB99900D40DCC /* DidactGothic-Regular.ttf */,
-				27F0B1BA27BFB99900D40DCC /* NotoSans-Bold.ttf */,
-				27F0B1BC27BFB99900D40DCC /* NotoSans-BoldItalic.ttf */,
-				27F0B1BE27BFB99900D40DCC /* NotoSans-Italic.ttf */,
-				27F0B1BB27BFB99900D40DCC /* NotoSans-Regular.ttf */,
+				27DCC5EF27C39788009DF7D0 /* NotoSans-Bold.ttf */,
+				27DCC5F027C39788009DF7D0 /* NotoSans-BoldItalic.ttf */,
+				27DCC5EE27C39788009DF7D0 /* NotoSans-Italic.ttf */,
+				27DCC5ED27C39788009DF7D0 /* NotoSans-Regular.ttf */,
+				27DCC5EB27C396E8009DF7D0 /* DidactGothic-Regular.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -269,13 +269,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				27B4988927BFBE2C00E618F7 /* DidactGothic-Regular.ttf in Resources */,
-				27B4988A27BFBE2C00E618F7 /* NotoSans-Bold.ttf in Resources */,
-				27B4988B27BFBE2C00E618F7 /* NotoSans-BoldItalic.ttf in Resources */,
-				27B4988C27BFBE2C00E618F7 /* NotoSans-Italic.ttf in Resources */,
-				27B4988D27BFBE2C00E618F7 /* NotoSans-Regular.ttf in Resources */,
 				27F7F09827BCC9D700035C91 /* GoogleService-Info.plist in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
+				27DCC5F127C39788009DF7D0 /* NotoSans-Regular.ttf in Resources */,
+				27DCC5F327C39788009DF7D0 /* NotoSans-Bold.ttf in Resources */,
+				27DCC5F427C39788009DF7D0 /* NotoSans-BoldItalic.ttf in Resources */,
+				27DCC5F227C39788009DF7D0 /* NotoSans-Italic.ttf in Resources */,
+				27DCC5EC27C396E8009DF7D0 /* DidactGothic-Regular.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
