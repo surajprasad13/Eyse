@@ -9,18 +9,20 @@ import {
   TextInput,
   Modal,
 } from 'react-native';
-import styles from './styles';
-import colors from '../../constants/colors';
-import MaterialIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import data from '../../constants/data';
 import MasonryList from 'react-native-masonry-list';
-
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-
 import Video from 'react-native-video';
 
-const width = Dimensions.get('window').width;
-const height = Dimensions.get('window').height;
+// icons
+import MaterialIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+
+// helpers
+import styles from './styles';
+import data from '../../constants/data';
+
+import {colors} from '../../theme';
+
+const {width, height} = Dimensions.get('screen');
 
 export default class ExpertContentList extends React.Component {
   constructor(props) {
@@ -58,7 +60,7 @@ export default class ExpertContentList extends React.Component {
             style={{
               ...styles.row,
               justifyContent: 'space-between',
-              backgroundColor: '#F2F7FD',
+              backgroundColor: colors.background,
               paddingVertical: 10,
               paddingHorizontal: 30,
               marginVertical: 20,
@@ -70,7 +72,7 @@ export default class ExpertContentList extends React.Component {
               <Text
                 style={{
                   ...styles.primaryMTextBold,
-                  color: colors.primaryBackground,
+                  color: colors.primary,
                 }}>
                 Book an appointment
               </Text>
@@ -90,7 +92,7 @@ export default class ExpertContentList extends React.Component {
             <Text
               style={{
                 ...styles.secondarySText,
-                color: colors.primaryBackground,
+                color: colors.primary,
                 textAlign: 'right',
               }}>
               How to use this space
@@ -108,7 +110,7 @@ export default class ExpertContentList extends React.Component {
                 <Text
                   style={{
                     ...styles.primaryLTextBold,
-                    color: colors.primaryBackground,
+                    color: colors.primary,
                   }}>
                   How to use expert zone
                 </Text>
@@ -170,7 +172,7 @@ export default class ExpertContentList extends React.Component {
             style={{
               ...styles.row,
               justifyContent: 'space-between',
-              backgroundColor: '#F2F7FD',
+              backgroundColor: colors.background,
               borderRadius: 20,
               padding: 8,
               borderWidth: 0.5,

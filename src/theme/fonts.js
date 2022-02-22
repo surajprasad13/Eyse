@@ -1,5 +1,5 @@
 export default {
-  regular: 'NotoSans-Regular',
+  regular: 'PTSans-Regular',
   bold: 'NotoSans-Bold',
   italic: 'NotoSans-Italic',
   boldItalic: 'NotoSans-BoldItalic',

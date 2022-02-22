@@ -29,22 +29,15 @@ import {UserApi} from '../../axios';
 import Loader from '../../constants/Loader';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
+import api from '../../api';
 
 class TabBar extends React.Component {
   constructor(props) {
     super(props);
   }
-
   render() {
     return (
-      <View
-        style={{
-          ...styles.row,
-          justifyContent: 'space-between',
-          backgroundColor: '#F2F7FD',
-          marginHorizontal: 30,
-          marginVertical: 20,
-        }}>
+      <View style={{...styles.row}}>
         <TouchableOpacity
           style={{
             width: width / 3 - 20,
@@ -134,7 +127,6 @@ export default class YourProfile extends Component {
       this.setState({auth: user.toString()});
       this.setState({userId: userId});
     }
-
     this.getInfluencerDetails();
     this.focusListener = this.props.navigation.addListener('focus', () => {
       this.getInfluencerDetails();
@@ -155,16 +147,14 @@ export default class YourProfile extends Component {
         this.setState({loader: false});
       })
       .catch(function (error) {
-        // alert(error);
-        console.log(error.response);
+        console.log(error.response.data);
       });
   }
   getTextPost() {
     let axiosConfig = {
       headers: {
         'Content-Type': 'multipart/form-data',
-        Authorization:
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWJlZTJjMzg3Nzg1ZjA5NzljY2ZiY2EiLCJlbWFpbCI6InRhbWFuQDEyMy5nbWFpbC5jb20iLCJtb2JpbGUiOiI3MDA3MzMyNzI3IiwiaWF0IjoxNjQxNjI0OTc0LCJleHAiOjE2NDQyMTY5NzR9.7DYVd6nVLLpi1-nGsOwE7pudxfkcTN1gHZTFarMQdAQ',
+        Authorization: `Bearer ${this.state.auth}`,
       },
     };
     var url =
@@ -175,20 +165,15 @@ export default class YourProfile extends Component {
       .get(url, axiosConfig)
       .then(response => {
         let data = response.data.Data;
-
         let arr = this.state.textData;
         data.forEach(element => {
           // arr.push({ id: element._id });
           arr.push({id: element._id, desc: element.desc});
         });
-
         this.setState({textData: arr});
-
-        console.log(this.state.textData);
       })
       .catch(function (error) {
-        // alert(error);
-        console.log(error.response);
+        console.log(error?.response, 'Error');
       });
   }
 
@@ -199,21 +184,23 @@ export default class YourProfile extends Component {
         data.forEach(element => {
           this.setState({videoData: element.data});
         });
-
-        console.log(this.state.videoData);
       })
       .catch(function (error) {
-        // alert(error);
-        console.log(error.response);
+        console.log(error.response.data);
       });
   }
   async getInfluencerDetails() {
     let user = await AsyncStorage.getItem('userData');
+    const token = JSON.parse(await AsyncStorage.getItem('userToken'));
     let jsonUser = JSON.parse(user);
-
-    UserApi.getUserDetails(jsonUser._id)
+    const id = await AsyncStorage.getItem('userId');
+    await api
+      .get(`inflncr/getInfluencerDetails/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       .then(response => {
-        console.log(response);
         if (response.data.Data.profile_image != undefined) {
           this.setState({
             profile_image: response.data.Data.profile_image.url,
@@ -221,7 +208,6 @@ export default class YourProfile extends Component {
         }
 
         this.setState({influencerDetails: response.data.Data});
-
         this.getImagePost();
         this.getVideoPost();
       })

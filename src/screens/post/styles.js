@@ -31,17 +31,17 @@ export default StyleSheet.create({
   },
   primarySText: {
     fontSize: 14,
-    fontFamily: 'NotoSans-Regular',
+    fontFamily: 'PTSans-Regular',
     color: '#015DD3',
   },
   primaryXSText: {
     fontSize: 12,
-    fontFamily: 'NotoSans-Regular',
+    fontFamily: 'PTSans-Regular',
     color: '#677890',
   },
   primaryMText: {
     fontSize: 16,
-    fontFamily: 'NotoSans-Regular',
+    fontFamily: 'PTSans-Regular',
     color: '#011E46',
   },
 

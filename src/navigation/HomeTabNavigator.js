@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, View, Image} from 'react-native';
+import {Text, View, Image, SafeAreaView} from 'react-native';
 
 // ================ CREATE TAB NAVIGATOR ================ //
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -12,6 +12,8 @@ import {ActivityIndicator} from 'react-native-paper';
 
 import Icon from 'react-native-vector-icons/Feather';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+
+import {colors} from '../theme';
 
 const Tab = createBottomTabNavigator();
 
@@ -30,6 +32,7 @@ export default class HomeTabNavigator extends React.Component {
   }
   async getInfluencerDetails() {
     const userToken = await AsyncStorage.getItem('userToken');
+
     const userId = await AsyncStorage.getItem('userId');
 
     const userType = await AsyncStorage.getItem('userType');
@@ -42,8 +45,7 @@ export default class HomeTabNavigator extends React.Component {
       let axiosConfig = {
         headers: {
           'Content-Type': 'multipart/form-data',
-          Authorization:
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWJlZTJjMzg3Nzg1ZjA5NzljY2ZiY2EiLCJlbWFpbCI6InRhbWFuQDEyMy5nbWFpbC5jb20iLCJtb2JpbGUiOiI3MDA3MzMyNzI3IiwiaWF0IjoxNjQxNjI0OTc0LCJleHAiOjE2NDQyMTY5NzR9.7DYVd6nVLLpi1-nGsOwE7pudxfkcTN1gHZTFarMQdAQ',
+          Authorization: `Bearer ${userToken}`,
         },
       };
       let url =
@@ -57,7 +59,7 @@ export default class HomeTabNavigator extends React.Component {
           this.setState({loading: false});
         })
         .catch(err => {
-          console.log('AXIOS ERROR: ', err);
+          console.log('AXIOS ERROR: ', err.response.data);
           this.setState({loading: false});
         });
     }
@@ -75,10 +77,8 @@ export default class HomeTabNavigator extends React.Component {
           initialRouteName="Home"
           screenOptions={{
             headerShown: false,
-            tabBarStyle: {
-              height: 60,
-            },
-            tabBarActiveTintColor: '#2362FB',
+            tabBarActiveTintColor: colors.text,
+            tabBarInactiveTintColor: colors.primary,
           }}>
           <Tab.Screen
             name="Home"

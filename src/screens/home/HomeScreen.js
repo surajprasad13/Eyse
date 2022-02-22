@@ -11,19 +11,22 @@ import {
   ScrollView,
   ActivityIndicator,
 } from 'react-native';
-import styles from './styles';
-
-const width = Dimensions.get('window').width;
-const height = Dimensions.get('window').height;
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import Carousel, {Pagination} from 'react-native-snap-carousel';
-import data from '../../constants/data';
+import axios from 'axios';
 
+// helpers
+import data from '../../constants/data';
 import ImagePostView from './components/ImagePostView';
 import VideoPostView from './components/VideoPostView';
 import TextPostView from './components/TextPostView';
-import axios from 'axios';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import styles from './styles';
+import {colors} from '../../theme';
+
+// icons
+import AntDesign from 'react-native-vector-icons/AntDesign';
+
+const {width, height} = Dimensions.get('screen');
 
 export default class HomeScreen extends Component {
   constructor(props) {
@@ -91,7 +94,7 @@ export default class HomeScreen extends Component {
           style={{
             ...styles.secondaryMText,
             textAlign: 'center',
-            color: '#011E46',
+            color: colors.text,
             width: width / 1.3,
           }}>
           Check out our latest BERG & MIYAMA Collections
@@ -162,7 +165,7 @@ export default class HomeScreen extends Component {
             </TouchableOpacity>
 
             <View>
-              <Text>logo</Text>
+              <Text>Logo</Text>
             </View>
 
             <View style={{...styles.row}}>
@@ -176,10 +179,7 @@ export default class HomeScreen extends Component {
                 onPress={() => {
                   this.props.navigation.navigate('YourBooking');
                 }}>
-                <Image
-                  source={require('../../assets/icons/duo_video.png')}
-                  style={{width: 29, height: 29}}
-                />
+                <AntDesign name="calendar" size={25} color={colors.primary} />
               </TouchableOpacity>
             </View>
           </SafeAreaView>

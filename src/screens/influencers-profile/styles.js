@@ -32,12 +32,12 @@ export default StyleSheet.create({
   },
   primaryMText: {
     fontSize: 14,
-    fontFamily: 'NotoSans-Regular',
+    fontFamily: 'PTSans-Regular',
     color: '#677890',
   },
   primarySText: {
     fontSize: 12,
-    fontFamily: 'NotoSans-Regular',
+    fontFamily: 'PTSans-Regular',
     color: '#99A5B5',
   },
   secondaryMText: {

@@ -1,4 +1,6 @@
 import axios from 'axios';
+import {store} from './store';
+
 class Api {
   static _axios = null;
   static instance() {
@@ -7,8 +9,7 @@ class Api {
         baseURL: 'http://18.190.154.188:9000/',
         headers: {
           'Content-Type': 'multipart/form-data',
-          Authorization:
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWJlZTJjMzg3Nzg1ZjA5NzljY2ZiY2EiLCJlbWFpbCI6InRhbWFuQDEyMy5nbWFpbC5jb20iLCJtb2JpbGUiOiI3MDA3MzMyNzI3IiwiaWF0IjoxNjQwNDMyMzgyLCJleHAiOjE2NDMwMjQzODJ9.nryRqU1BpWss5RGwSCuSts_wnyrdsHsACSHZXP6maWw',
+          Authorization: store.getState()?.auth?.authToken,
         },
       });
     }
@@ -35,6 +36,15 @@ export class UserApi {
   }
   static becomeInfluencer(formdata) {
     return Api.instance().post('inflncr/registerNewInfluencer', formdata);
+  }
+  static getInfluencerBookings(id) {
+    return Api.instance().get('/inflncr/getInfluencerBookings/' + id);
+  }
+  static getUserBookingDetails(id) {
+    return Api.instance().get('/bookings/getUserBookingDetails/' + id);
+  }
+  static getInfluencerBookingDetails(id) {
+    return Api.instance().get('/bookings/getInfluencerBookingDetails/' + id);
   }
 }
 export class UserPost {

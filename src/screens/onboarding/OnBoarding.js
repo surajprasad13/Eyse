@@ -197,7 +197,7 @@ const styles = StyleSheet.create({
   },
   primarySText: {
     fontSize: 14,
-    fontFamily: 'NotoSans-Regular',
+    fontFamily: 'PTSans-Regular',
     color: '#FFFFFF',
   },
   btnWrapper: {
