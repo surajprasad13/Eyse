@@ -4,7 +4,6 @@ import {
   FlatList,
   Modal,
   ScrollView,
-  Slider,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -13,6 +12,7 @@ import {
 import {useDispatch, useSelector} from 'react-redux';
 import {filterModal} from '../../../../store/actions/shopActions';
 import {typography} from '../../../../common/typography';
+import Slider from '@react-native-community/slider';
 
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 

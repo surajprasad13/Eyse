@@ -10,7 +10,6 @@ import {
 } from 'react-native';
 
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
-import {Camera} from 'expo-camera';
 
 // icons
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -51,13 +50,6 @@ const CameraSmartSearch = ({navigation}) => {
     });
   };
 
-  useEffect(() => {
-    (async () => {
-      const {status} = await Camera.requestCameraPermissionsAsync();
-      setHasPermission(status === 'granted');
-    })();
-  }, []);
-
   if (hasPermission === null) {
     return <View />;
   }
@@ -96,7 +88,25 @@ const CameraSmartSearch = ({navigation}) => {
         </TouchableOpacity>
       </Modal>
 
-      <Camera
+      <View style={{flex: 0, flexDirection: 'row', justifyContent: 'center'}}>
+        <TouchableOpacity onPress={() => setType(!type)} style={styles.capture}>
+          <Ionicons name={'camera-reverse'} color={'#fff'} size={40} />
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => takePicture(camera)}
+          style={styles.capture}>
+          <MaterialCommunityIcons name="circle" size={60} color={'red'} />
+        </TouchableOpacity>
+        <TouchableOpacity onPress={pickImage} style={styles.capture}>
+          <Ionicons name="md-images-outline" size={40} color={'#fff'} />
+        </TouchableOpacity>
+      </View>
+      <TouchableOpacity
+        onPress={() => setFullImage(true)}
+        onLongPress={() => setImage(null)}>
+        <Image source={{uri: image}} style={styles.imagePreview} />
+      </TouchableOpacity>
+      {/* <Camera
         style={styles.preview}
         type={type ? 'back' : 'front'}
         ref={camera}>
@@ -120,7 +130,7 @@ const CameraSmartSearch = ({navigation}) => {
           onLongPress={() => setImage(null)}>
           <Image source={{uri: image}} style={styles.imagePreview} />
         </TouchableOpacity>
-      </Camera>
+      </Camera> */}
     </View>
   );
 };

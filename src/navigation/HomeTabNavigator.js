@@ -12,6 +12,7 @@ import {ActivityIndicator} from 'react-native-paper';
 
 import Icon from 'react-native-vector-icons/Feather';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+import ShopStack from './ShopStack';
 
 import {colors} from '../theme';
 
@@ -110,7 +111,7 @@ export default class HomeTabNavigator extends React.Component {
           />
           <Tab.Screen
             name="Store"
-            component={HomeScreen}
+            component={ShopStack}
             options={{
               tabBarShowLabel: false,
               tabBarIcon: ({size, color}) => (

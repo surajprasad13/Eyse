@@ -1,9 +1,4 @@
-import {
-  MaterialCommunityIcons,
-  MaterialIcons,
-  SimpleLineIcons,
-} from "@expo/vector-icons";
-import React, { useRef, useState } from "react";
+import React, {useRef, useState} from 'react';
 import {
   Dimensions,
   Image,
@@ -11,17 +6,24 @@ import {
   Text,
   TouchableOpacity,
   View,
-} from "react-native";
-import Share from "react-native-share";
-import Video from "react-native-video";
-import { options } from "../../data/Options";
-//import HeaderModal from './components/HeaderModal';
-import RenderProductCard from "./components/RenderProductCard";
-const { height, width } = Dimensions.get("screen");
-const fontRegular = "DidactGothic_400Regular";
-const fontBold = "NotoSans_700Bold";
+} from 'react-native';
+import Share from 'react-native-share';
+import Video from 'react-native-video';
 
-const InfluencerPost = ({ navigation, route }) => {
+// icons
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
+// helpers
+import RenderProductCard from './components/RenderProductCard';
+import {options} from '../../data/Options';
+const {height, width} = Dimensions.get('screen');
+
+// fonts
+const fontRegular = 'DidactGothic-Regular';
+const fontBold = 'PTSans-Bold';
+
+const InfluencerPost = ({navigation, route}) => {
   const [opened, setOpened] = useState(false);
   const [clicked, setClicked] = useState(false);
   const videoRef = useRef();
@@ -33,26 +35,23 @@ const InfluencerPost = ({ navigation, route }) => {
         flex: 1,
         height: height,
         width: width,
-        backgroundColor: "black",
+        backgroundColor: 'black',
       }}
-      onPress={() => setClicked(!clicked)}
-    >
-      {route.params.type == "image" ? (
+      onPress={() => setClicked(!clicked)}>
+      {route.params.type == 'image' ? (
         <ImageBackground
-          style={{ flex: 1 }}
-          imageStyle={{ resizeMode: "contain" }}
-          source={route.params.image}
-        >
+          style={{flex: 1}}
+          imageStyle={{resizeMode: 'contain'}}
+          source={route.params.image}>
           {!opened ? (
             <View
               style={{
-                flexDirection: "row",
+                flexDirection: 'row',
                 padding: 20,
                 width: width,
-                justifyContent: "space-between",
+                justifyContent: 'space-between',
                 //backgroundColor: 'rgba(1,30,70,0.7)',
-              }}
-            >
+              }}>
               <TouchableOpacity onPress={() => navigation.goBack()}>
                 {/* <Image
                   style={{
@@ -64,12 +63,12 @@ const InfluencerPost = ({ navigation, route }) => {
                   source={require('../../assets/images/back-arrow-icon.png')}
                 /> */}
                 <MaterialCommunityIcons
-                  name={"chevron-left"}
-                  color={"#fff"}
+                  name={'chevron-left'}
+                  color={'#fff'}
                   size={32}
                 />
               </TouchableOpacity>
-              <View style={{ flexDirection: "row", marginLeft: -40 }}>
+              <View style={{flexDirection: 'row', marginLeft: -40}}>
                 <Image
                   style={{
                     height: 50,
@@ -77,26 +76,24 @@ const InfluencerPost = ({ navigation, route }) => {
                     marginHorizontal: 30,
                     borderRadius: 50,
                   }}
-                  source={require("../../assets/images/img3.png")}
+                  source={require('../../assets/images/img3.png')}
                 />
-                <View style={{ alignSelf: "center" }}>
+                <View style={{alignSelf: 'center'}}>
                   <Text
                     style={{
-                      color: "#F2F7FD",
+                      color: '#F2F7FD',
                       fontSize: 16,
                       fontFamily: fontBold,
-                    }}
-                  >
+                    }}>
                     Influencers Name
                   </Text>
-                  <View style={{ flexDirection: "row" }}>
+                  <View style={{flexDirection: 'row'}}>
                     <Text
                       style={{
-                        color: "#F2F7FD",
+                        color: '#F2F7FD',
                         fontSize: 14,
                         fontFamily: fontBold,
-                      }}
-                    >
+                      }}>
                       Follow
                     </Text>
                     <TouchableOpacity onPress={() => setOpened(true)}>
@@ -110,8 +107,8 @@ const InfluencerPost = ({ navigation, route }) => {
                         }}
                       /> */}
                       <MaterialCommunityIcons
-                        name={"chevron-down"}
-                        color={"#fff"}
+                        name={'chevron-down'}
+                        color={'#fff'}
                         size={26}
                       />
                     </TouchableOpacity>
@@ -123,8 +120,8 @@ const InfluencerPost = ({ navigation, route }) => {
                 style={{height: 28, width: 28, alignSelf: 'center', right: 0}}
               /> */}
               <SimpleLineIcons
-                name={"options-vertical"}
-                color={"#fff"}
+                name={'options-vertical'}
+                color={'#fff'}
                 size={24}
               />
             </View>
@@ -132,19 +129,17 @@ const InfluencerPost = ({ navigation, route }) => {
             <View
               style={{
                 width: width,
-                backgroundColor: "rgba(1,30,70,0.7)",
+                backgroundColor: 'rgba(1,30,70,0.7)',
                 padding: 20,
-              }}
-            >
+              }}>
               <View
                 style={{
-                  flexDirection: "row",
+                  flexDirection: 'row',
 
                   width: width,
-                  justifyContent: "space-between",
-                }}
-              >
-                <View style={{ flexDirection: "row" }}>
+                  justifyContent: 'space-between',
+                }}>
+                <View style={{flexDirection: 'row'}}>
                   <Image
                     style={{
                       height: 50,
@@ -152,26 +147,24 @@ const InfluencerPost = ({ navigation, route }) => {
                       marginRight: 30,
                       borderRadius: 50,
                     }}
-                    source={require("../../assets/images/img3.png")}
+                    source={require('../../assets/images/img3.png')}
                   />
-                  <View style={{ alignSelf: "center" }}>
+                  <View style={{alignSelf: 'center'}}>
                     <Text
                       style={{
-                        color: "#F2F7FD",
+                        color: '#F2F7FD',
                         fontSize: 16,
                         fontFamily: fontBold,
-                      }}
-                    >
+                      }}>
                       Influencers Name
                     </Text>
-                    <View style={{ flexDirection: "row" }}>
+                    <View style={{flexDirection: 'row'}}>
                       <Text
                         style={{
-                          color: "#F2F7FD",
+                          color: '#F2F7FD',
                           fontSize: 14,
                           fontFamily: fontBold,
-                        }}
-                      >
+                        }}>
                         Follow
                       </Text>
                       <TouchableOpacity onPress={() => setOpened(false)}>
@@ -185,8 +178,8 @@ const InfluencerPost = ({ navigation, route }) => {
                           }}
                         /> */}
                         <MaterialCommunityIcons
-                          name={"chevron-up"}
-                          color={"#fff"}
+                          name={'chevron-up'}
+                          color={'#fff'}
                           size={26}
                         />
                       </TouchableOpacity>
@@ -198,46 +191,44 @@ const InfluencerPost = ({ navigation, route }) => {
                   style={{height: 28, width: 28, alignSelf: 'center', right: 0}}
                 /> */}
                 <SimpleLineIcons
-                  name={"options-vertical"}
-                  color={"#fff"}
+                  name={'options-vertical'}
+                  color={'#fff'}
                   size={24}
                 />
               </View>
               <Text
                 style={{
-                  color: "#F2F7FD",
+                  color: '#F2F7FD',
                   fontSize: 14,
                   fontFamily: fontRegular,
-                }}
-              >
+                }}>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. In
                 molestie, ante id tincidunt dapibus... Lorem ipsum dolor sit
                 amet, consectetur adipiscing elit. In molestie, ante id
                 tincidunt dapibus...
               </Text>
-              <View style={{ flexDirection: "row", marginTop: 10 }}>
+              <View style={{flexDirection: 'row', marginTop: 10}}>
                 {/* <Image
                   source={require('../../assets/images/profile-icon.png')}
                   style={{height: 28, width: 28, alignSelf: 'center', right: 0}}
                 /> */}
-                <MaterialIcons name={"person"} size={24} color={"#fff"} />
+                <MaterialIcons name={'person'} size={24} color={'#fff'} />
                 <Text
                   style={{
-                    alignSelf: "center",
-                    color: "#fff",
+                    alignSelf: 'center',
+                    color: '#fff',
                     fontSize: 14,
                     marginLeft: 10,
                     fontFamily: fontRegular,
-                  }}
-                >
-                  {" "}
+                  }}>
+                  {' '}
                   2 Products
                 </Text>
               </View>
             </View>
           )}
           {clicked ? (
-            <View style={{ position: "absolute", bottom: 150, left: 50 }}>
+            <View style={{position: 'absolute', bottom: 150, left: 50}}>
               <RenderProductCard />
             </View>
           ) : null}
@@ -246,64 +237,60 @@ const InfluencerPost = ({ navigation, route }) => {
               height: 120,
               width: width,
               bottom: 0,
-              position: "absolute",
-              flexDirection: "row",
-              justifyContent: "flex-end",
+              position: 'absolute',
+              flexDirection: 'row',
+              justifyContent: 'flex-end',
               paddingRight: 20,
-            }}
-          >
+            }}>
             <View>
               <View
                 style={{
                   height: 35,
                   width: 35,
                   borderRadius: 35,
-                  backgroundColor: "rgba(196,196,196,0.7)",
-                  alignItems: "center",
-                  justifyContent: "center",
+                  backgroundColor: 'rgba(196,196,196,0.7)',
+                  alignItems: 'center',
+                  justifyContent: 'center',
                   marginVertical: 5,
-                }}
-              >
+                }}>
                 <MaterialCommunityIcons
                   name="pin-outline"
                   color="#011E46"
                   size={24}
                 />
               </View>
-              <View style={{ flexDirection: "row", marginVertical: 5 }}>
+              <View style={{flexDirection: 'row', marginVertical: 5}}>
                 <SimpleLineIcons name="pin" color="#fff" size={18} />
-                <Text style={{ color: "#fff", marginLeft: 5 }}>120</Text>
+                <Text style={{color: '#fff', marginLeft: 5}}>120</Text>
               </View>
               <TouchableOpacity onPress={() => Share.open(options)}>
                 <MaterialCommunityIcons
                   name="share-variant"
                   color="#fff"
                   size={24}
-                  style={{ marginLeft: 5 }}
+                  style={{marginLeft: 5}}
                 />
               </TouchableOpacity>
             </View>
           </View>
         </ImageBackground>
       ) : (
-        <View style={{ flex: 1, height: height, width: width }}>
+        <View style={{flex: 1, height: height, width: width}}>
           {opened ? (
             <View
               style={{
                 width: width,
-                backgroundColor: "rgba(1,30,70,0.7)",
+                backgroundColor: 'rgba(1,30,70,0.7)',
                 padding: 20,
-              }}
-            >
+              }}>
               <View
                 style={{
-                  flexDirection: "row",
+                  flexDirection: 'row',
 
                   width: width,
-                  justifyContent: "space-between",
-                }}
-              >
-                <View style={{ flexDirection: "row" }}>
+                  justifyContent: 'space-between',
+                }}>
+                <View style={{flexDirection: 'row'}}>
                   <Image
                     style={{
                       height: 50,
@@ -311,26 +298,24 @@ const InfluencerPost = ({ navigation, route }) => {
                       marginRight: 30,
                       borderRadius: 50,
                     }}
-                    source={require("../../assets/images/img3.png")}
+                    source={require('../../assets/images/img3.png')}
                   />
-                  <View style={{ alignSelf: "center" }}>
+                  <View style={{alignSelf: 'center'}}>
                     <Text
                       style={{
-                        color: "#F2F7FD",
+                        color: '#F2F7FD',
                         fontSize: 16,
                         fontFamily: fontBold,
-                      }}
-                    >
+                      }}>
                       Influencers Name
                     </Text>
-                    <View style={{ flexDirection: "row" }}>
+                    <View style={{flexDirection: 'row'}}>
                       <Text
                         style={{
-                          color: "#F2F7FD",
+                          color: '#F2F7FD',
                           fontSize: 14,
                           fontFamily: fontBold,
-                        }}
-                      >
+                        }}>
                         Follow
                       </Text>
                       <TouchableOpacity onPress={() => setOpened(false)}>
@@ -344,8 +329,8 @@ const InfluencerPost = ({ navigation, route }) => {
                           }}
                         /> */}
                         <MaterialCommunityIcons
-                          name={"chevron-up"}
-                          color={"#fff"}
+                          name={'chevron-up'}
+                          color={'#fff'}
                           size={24}
                         />
                       </TouchableOpacity>
@@ -353,42 +338,40 @@ const InfluencerPost = ({ navigation, route }) => {
                   </View>
                 </View>
                 <Image
-                  source={require("../../assets/images/more_vertical.png")}
+                  source={require('../../assets/images/more_vertical.png')}
                   style={{
                     height: 28,
                     width: 28,
-                    alignSelf: "center",
+                    alignSelf: 'center',
                     right: 0,
                   }}
                 />
               </View>
               <Text
                 style={{
-                  color: "#F2F7FD",
+                  color: '#F2F7FD',
                   fontSize: 14,
                   fontFamily: fontRegular,
-                }}
-              >
+                }}>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. In
                 molestie, ante id tincidunt dapibus... Lorem ipsum dolor sit
                 amet, consectetur adipiscing elit. In molestie, ante id
                 tincidunt dapibus...
               </Text>
-              <View style={{ flexDirection: "row", marginTop: 10 }}>
+              <View style={{flexDirection: 'row', marginTop: 10}}>
                 {/* <Image
                   source={require('../../assets/images/profile-icon.png')}
                   style={{height: 28, width: 28, alignSelf: 'center', right: 0}}
                 /> */}
-                <MaterialIcons name={"person"} size={24} color={"#fff"} />
+                <MaterialIcons name={'person'} size={24} color={'#fff'} />
                 <Text
                   style={{
-                    alignSelf: "center",
-                    color: "#fff",
+                    alignSelf: 'center',
+                    color: '#fff',
                     fontSize: 14,
                     fontFamily: fontRegular,
-                  }}
-                >
-                  {" "}
+                  }}>
+                  {' '}
                   2 Products
                 </Text>
               </View>
@@ -396,13 +379,12 @@ const InfluencerPost = ({ navigation, route }) => {
           ) : (
             <View
               style={{
-                flexDirection: "row",
+                flexDirection: 'row',
                 padding: 20,
                 width: width,
-                justifyContent: "space-between",
+                justifyContent: 'space-between',
                 //backgroundColor: 'rgba(1,30,70,0.7)',
-              }}
-            >
+              }}>
               <TouchableOpacity onPress={() => navigation.goBack()}>
                 {/* <Image
                   style={{
@@ -414,12 +396,12 @@ const InfluencerPost = ({ navigation, route }) => {
                   source={require('../../assets/images/back-arrow-icon.png')}
                 /> */}
                 <MaterialCommunityIcons
-                  name={"chevron-left"}
-                  color={"#fff"}
+                  name={'chevron-left'}
+                  color={'#fff'}
                   size={32}
                 />
               </TouchableOpacity>
-              <View style={{ flexDirection: "row", marginLeft: -40 }}>
+              <View style={{flexDirection: 'row', marginLeft: -40}}>
                 <Image
                   style={{
                     height: 50,
@@ -427,26 +409,24 @@ const InfluencerPost = ({ navigation, route }) => {
                     marginHorizontal: 30,
                     borderRadius: 50,
                   }}
-                  source={require("../../assets/images/img3.png")}
+                  source={require('../../assets/images/img3.png')}
                 />
-                <View style={{ alignSelf: "center" }}>
+                <View style={{alignSelf: 'center'}}>
                   <Text
                     style={{
-                      color: "#F2F7FD",
+                      color: '#F2F7FD',
                       fontSize: 16,
                       fontFamily: fontBold,
-                    }}
-                  >
+                    }}>
                     Influencers Name
                   </Text>
-                  <View style={{ flexDirection: "row" }}>
+                  <View style={{flexDirection: 'row'}}>
                     <Text
                       style={{
-                        color: "#F2F7FD",
+                        color: '#F2F7FD',
                         fontSize: 14,
                         fontFamily: fontBold,
-                      }}
-                    >
+                      }}>
                       Follow
                     </Text>
                     <TouchableOpacity onPress={() => setOpened(true)}>
@@ -460,8 +440,8 @@ const InfluencerPost = ({ navigation, route }) => {
                         }}
                       /> */}
                       <MaterialCommunityIcons
-                        name={"chevron-down"}
-                        color={"#fff"}
+                        name={'chevron-down'}
+                        color={'#fff'}
                         size={24}
                       />
                     </TouchableOpacity>
@@ -473,8 +453,8 @@ const InfluencerPost = ({ navigation, route }) => {
                 style={{height: 28, width: 28, alignSelf: 'center', right: 0}}
               /> */}
               <SimpleLineIcons
-                name={"options-vertical"}
-                color={"#fff"}
+                name={'options-vertical'}
+                color={'#fff'}
                 size={24}
               />
             </View>
@@ -489,16 +469,16 @@ const InfluencerPost = ({ navigation, route }) => {
             }}
             ref={videoRef}
             source={{
-              uri: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+              uri: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
             }}
-            resizeMode={"cover"}
+            resizeMode={'cover'}
             muted={clicked == 1 ? true : false}
             volume={10}
           />
           {/* <HeaderModal opened={true} navigation={navigation} /> */}
 
           {clicked ? (
-            <View style={{ position: "absolute", bottom: 150, left: 50 }}>
+            <View style={{position: 'absolute', bottom: 150, left: 50}}>
               <RenderProductCard />
             </View>
           ) : null}
@@ -507,40 +487,38 @@ const InfluencerPost = ({ navigation, route }) => {
               height: 120,
               width: width,
               bottom: 0,
-              position: "absolute",
-              flexDirection: "row",
-              justifyContent: "flex-end",
+              position: 'absolute',
+              flexDirection: 'row',
+              justifyContent: 'flex-end',
               paddingRight: 20,
-            }}
-          >
+            }}>
             <View>
               <View
                 style={{
                   height: 35,
                   width: 35,
                   borderRadius: 35,
-                  backgroundColor: "rgba(196,196,196,0.7)",
-                  alignItems: "center",
-                  justifyContent: "center",
+                  backgroundColor: 'rgba(196,196,196,0.7)',
+                  alignItems: 'center',
+                  justifyContent: 'center',
                   marginVertical: 5,
-                }}
-              >
+                }}>
                 <MaterialCommunityIcons
                   name="pin-outline"
                   color="#011E46"
                   size={24}
                 />
               </View>
-              <View style={{ flexDirection: "row", marginVertical: 5 }}>
+              <View style={{flexDirection: 'row', marginVertical: 5}}>
                 <SimpleLineIcons name="pin" color="#fff" size={18} />
-                <Text style={{ color: "#fff", marginLeft: 5 }}>120</Text>
+                <Text style={{color: '#fff', marginLeft: 5}}>120</Text>
               </View>
               <TouchableOpacity onPress={() => Share.open(options)}>
                 <MaterialCommunityIcons
                   name="share-variant"
                   color="#fff"
                   size={24}
-                  style={{ marginLeft: 5 }}
+                  style={{marginLeft: 5}}
                 />
               </TouchableOpacity>
             </View>

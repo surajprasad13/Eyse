@@ -1,12 +1,12 @@
 export const typography = {
-  NatoBlack: 'PTSasns-Black',
+  NatoBlack: 'PTSans-Bold',
   NotoSansBold: 'PTSans-Bold',
-  NotoSansExtraBold: '',
-  NotoSansExtraLight: '',
+  NotoSansExtraBold: 'PTSans-Bold',
+  NotoSansExtraLight: 'PTSans-Regular',
   NotoSansLight: 'PTSans-Light',
-  NotoSansMedium: 'PTSasns-Medium',
+  NotoSansMedium: 'PTSans-Medium',
   NotoSansRegular: 'PTSans-Regular',
-  NotoSansSemiBold: '',
+  NotoSansSemiBold: 'PTSans-Bold',
   NotoSansThin: 'PTSans-Thin',
   DidactGothicRegular: 'DidactGothic-Regular',
 };

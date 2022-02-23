@@ -6,7 +6,6 @@ import {
   Modal,
   TouchableOpacity,
   StyleSheet,
-  Slider,
   Dimensions,
   Image,
 } from 'react-native';

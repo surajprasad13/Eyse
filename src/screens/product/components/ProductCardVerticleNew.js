@@ -13,12 +13,12 @@ const ProductCardVerticleNew = props => {
   const [imageHeight, setImageHeight] = React.useState(300);
   const [liked, setLiked] = React.useState(false);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  React.useEffect(async () => {
+  React.useEffect(() => {
     Image.getSize(props.image, (_width, height) => {
       setImageHeight(height);
     });
   }, [props.image]);
+
   const ht = props.title ? 50 : 0;
   return (
     <TouchableOpacity
