@@ -151,8 +151,6 @@ export default class ProfileScreen extends Component {
     this.setState({userId: userId});
 
     if (this.state.auth != '' && this.state.id != '' && userToken != null) {
-      console.log(this.state.auth);
-
       let axiosConfig = {
         headers: {
           'Content-Type': 'multipart/form-data',
@@ -164,19 +162,14 @@ export default class ProfileScreen extends Component {
         'http://18.190.154.188:9000/inflncr/getInfluencerDetails/' +
         this.state.id;
 
-      console.log(url);
-
       axios
         .get(url, axiosConfig)
         .then(res => {
-          console.log('RESPONSE RECEIVED: ', res.data);
           this.setState({influencerDetails: res.data.Data});
-          // this.setState({ profile_image: res.data.Data.profile_image.url });
+
           this.setState({payment: res.data.Data.rate_per_hour});
         })
-        .catch(err => {
-          console.log('AXIOS ERROR: ', err);
-        });
+        .catch(err => {});
     }
   }
   getImagePost() {
@@ -198,19 +191,15 @@ export default class ProfileScreen extends Component {
 
         let arr = this.state.imageData;
         data.forEach(element => {
-          // arr.push({ id: element._id });
           arr.push({id: element._id, uri: element.desc});
         });
 
         this.setState({imageData: arr});
-        // console.log(response.data.Data);
-        console.log('Image State Data:');
-        console.log(this.state.imageData);
+
         this.setState({loader: false});
       })
       .catch(function (error) {
         // alert(error);
-        console.log(error.response);
       });
   }
 
@@ -238,12 +227,9 @@ export default class ProfileScreen extends Component {
         });
 
         this.setState({textData: arr});
-
-        console.log(this.state.textData);
       })
       .catch(function (error) {
         // alert(error);
-        console.log(error.response);
       });
   }
 
@@ -259,8 +245,6 @@ export default class ProfileScreen extends Component {
       'http://18.190.154.188:9000/inflncr/getInfluencerVideoPosts/' +
       this.state.id;
 
-    console.log(url);
-
     axios
       .get(url, axiosConfig)
       .then(response => {
@@ -272,12 +256,8 @@ export default class ProfileScreen extends Component {
         });
 
         this.setState({videoData: arr});
-        console.log('Video State Data:');
-        console.log(this.state.videoData);
       })
-      .catch(function (error) {
-        console.log(error.response);
-      });
+      .catch(function (error) {});
   }
   async onFollow(id) {
     let selected = this.state.following;
@@ -657,9 +637,7 @@ export default class ProfileScreen extends Component {
         }
         useNativeDriver={true}
         initialState={CollapsibleNavBarState.open}
-        onChangeState={state => {
-          console.log(state);
-        }}>
+        onChangeState={state => {}}>
         {this.state.selectedTab == 1 && (
           <MasonryList
             images={this.state.imageData}

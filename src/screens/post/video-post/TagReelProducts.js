@@ -6,7 +6,6 @@ import {
   Image,
   TouchableOpacity,
   Dimensions,
-  FlatList,
   TouchableWithoutFeedback,
   ScrollView,
   TextInput,
@@ -18,7 +17,6 @@ import _ from 'lodash';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-import data from '../../../constants/InterestsData';
 import Video from 'react-native-video';
 
 const width = Dimensions.get('window').width;
@@ -308,7 +306,6 @@ export default class TagReelProducts extends React.Component {
       isSearchText: false,
       tagList: this.state.tagList.concat([newView]),
     });
-    console.log('===tagList==', this.state.tagList);
   }
   removeUser(user) {
     let tempUser = this.state.tagList;
@@ -461,10 +458,7 @@ export default class TagReelProducts extends React.Component {
                     shouldPlay={this.state.shouldPlay}
                     resizeMode="contain"
                     isLooping
-                    onPlaybackStatusUpdate={status =>
-                      //this.setState({ status: status })
-                      console.log(status)
-                    }
+                    onPlaybackStatusUpdate={data => {}}
                   />
                 </TouchableWithoutFeedback>
                 {this.state.tagList.map(list => (

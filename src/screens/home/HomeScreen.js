@@ -46,10 +46,7 @@ export default class HomeScreen extends Component {
     const userType = await AsyncStorage.getItem('userType');
     this.setState({auth: user});
     this.setState({userType: userType});
-
     this.getAllInfluencer();
-
-    console.log(userType);
   }
   getAllInfluencer() {
     let axiosConfig = {
@@ -62,12 +59,10 @@ export default class HomeScreen extends Component {
     axios
       .get('http://18.190.154.188:9000/inflncr/getAllInfluencers', axiosConfig)
       .then(res => {
-        // console.log("RESPONSE RECEIVED: ", res);
         this.setState({allInfluencer: res.data.Data});
         this.setState({loading: false});
       })
       .catch(err => {
-        console.log('AXIOS ERROR: ', err);
         this.setState({loading: false});
       });
   }

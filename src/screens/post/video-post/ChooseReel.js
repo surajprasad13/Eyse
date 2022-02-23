@@ -7,8 +7,9 @@ import {
   Dimensions,
 } from 'react-native';
 import styles from '../styles';
-// import * as ImagePicker from 'expo-image-picker';
 import Video from 'react-native-video';
+import {launchImageLibrary} from 'react-native-image-picker';
+
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const width = Dimensions.get('window').width;
@@ -26,22 +27,11 @@ export default class ChooseReel extends React.Component {
   }
   render() {
     let openImagePickerAsync = async () => {
-      // let permissionResult =
-      //   await ImagePicker.requestMediaLibraryPermissionsAsync();
-      // if (permissionResult.granted === false) {
-      //   alert('Permission to access camera roll is required!');
-      //   return;
-      // }
-      // let pickerResult = await ImagePicker.launchImageLibraryAsync({
-      //   mediaTypes: ImagePicker.MediaTypeOptions.Videos,
-      //   allowsEditing: true,
-      //   aspect: [9, 16],
-      // });
-      // if (pickerResult.cancelled === true) {
-      //   return;
-      // }
-      // this.setState({selectedVideo: pickerResult.uri});
-      // console.log(pickerResult);
+      launchImageLibrary({mediaType: 'video', selectionLimit: 0}, response => {
+        if (response.assets) {
+          this.setState({selectedVideo: response.assets[0].uri});
+        }
+      });
     };
     return (
       <View style={{...styles.container, backgroundColor: '#011E46'}}>

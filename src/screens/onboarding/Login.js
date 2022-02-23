@@ -1,26 +1,30 @@
 import React, {useState} from 'react';
 import {
-  Text,
-  View,
-  StatusBar,
+  ActivityIndicator,
   Image,
   ScrollView,
+  StatusBar,
+  Text,
   TouchableOpacity,
-  ActivityIndicator,
+  View,
 } from 'react-native';
+import axios from 'axios';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import styles from './styles';
-import InputFormField from './components/InputFormField';
-
+import {useDispatch} from 'react-redux';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import axios from 'axios';
+// helpers
+import {UserLogin} from '../../store/actions/authActions';
+import InputFormField from './components/InputFormField';
+import styles from './styles';
 
 function Login({navigation}) {
+  const dispatch = useDispatch();
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [loggedIn, setLoggedIn] = useState(false);
   const [loader, setLoader] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const [userType, setUserType] = useState('');
 
   const loginValidation = () => {
@@ -32,7 +36,7 @@ function Login({navigation}) {
     if (type == 'user') {
       setLoader(true);
       axios
-        .post('https://18.190.154.188:9000/users/login', {
+        .post('http://18.190.154.188:9000/users/login', {
           email: username,
           password: password,
         })
@@ -49,15 +53,22 @@ function Login({navigation}) {
             await AsyncStorage.setItem('userId', response.data.data._id);
             await AsyncStorage.setItem('userType', 'user');
             setLoader(false);
+            dispatch(UserLogin(response.data.data.token));
+            dispatch(
+              UserLogin(
+                response.data.data.token,
+                response.data.data._id,
+                'user',
+              ),
+            );
             navigation.navigate('Interests');
           } else {
             alert('Invalid Credentials !!');
           }
         })
-        .catch(function (error) {
+        .catch(function () {
           alert('Invalid Credentials !!');
           setLoader(false);
-          // console.log(error);
         });
     }
     if (type == 'influencer') {
@@ -79,7 +90,13 @@ function Login({navigation}) {
             );
             await AsyncStorage.setItem('userId', response.data.data._id);
             await AsyncStorage.setItem('userType', 'influencer');
-
+            dispatch(
+              UserLogin(
+                response.data.data.token,
+                response.data.data._id,
+                'influencer',
+              ),
+            );
             navigation.navigate('Interests');
             setLoader(false);
           } else {
@@ -89,7 +106,6 @@ function Login({navigation}) {
         .catch(function (error) {
           alert('Invalid Credentials !!');
           setLoader(false);
-          console.log(error);
         });
     }
   };

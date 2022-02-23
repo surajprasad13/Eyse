@@ -46,21 +46,16 @@ export default class ConfirmBook extends React.Component {
       'http://18.190.154.188:9000/inflncr/getInfluencerDetails/' +
       this.state.influencer_id;
 
-    console.log(url);
-
     axios
       .get(url, axiosConfig)
       .then(async res => {
-        console.log('RESPONSE RECEIVED: ', res.data);
         this.setState({influencerDetails: res.data.Data});
         this.setState({profile_image: res.data.Data.profile_image.url});
         this.setState({coords: res.data.Data.location.coordinates});
 
         this.setState({loader: false});
       })
-      .catch(err => {
-        console.log('AXIOS ERROR: ', err.response);
-      });
+      .catch(err => {});
   }
 
   render() {

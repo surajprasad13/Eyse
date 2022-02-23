@@ -40,19 +40,14 @@ export default class AddReelDesc extends React.Component {
     } else return false;
   };
   async componentDidMount() {
-    console.log(this.state.tagList);
     const user = JSON.parse(await AsyncStorage.getItem('userToken'));
     if (user != null) {
       this.setState({token: user});
     }
 
     UserPost.getHashtags()
-      .then(res => {
-        console.log(res.data);
-      })
-      .catch(error => {
-        console.log(error.response);
-      });
+      .then(res => {})
+      .catch(error => {});
   }
   onSubmit = () => {
     this.setState({loading: true});
@@ -115,18 +110,13 @@ export default class AddReelDesc extends React.Component {
             },
           )
           .then(async response => {
-            console.log(response.data);
             if (response.status == 200) {
               this.props.navigation.navigate('ProfileTabNavigator');
             }
           })
-          .catch(function (error) {
-            console.log(error.response);
-          });
+          .catch(function (error) {});
       })
-      .catch(error => {
-        console.log(error.response);
-      });
+      .catch(error => {});
   };
   render() {
     return (

@@ -62,7 +62,6 @@ class InfluencerSideBookings extends React.Component {
   };
 
   componentDidMount() {
-    //console.log(this.props.auth.userId);
     UserApi.getInfluencerBookingDetails(this.props.auth.userId)
       .then(res => {
         const _data = res.data.Data;

@@ -8,7 +8,9 @@ import {
   Dimensions,
 } from 'react-native';
 import styles from '../styles';
-// import * as ImagePicker from 'expo-image-picker';
+
+import {launchImageLibrary} from 'react-native-image-picker';
+
 import Video from 'react-native-video';
 
 const width = Dimensions.get('window').width;
@@ -25,22 +27,11 @@ export default class ChooseVideo extends React.Component {
   }
   render() {
     let openImagePickerAsync = async () => {
-      // let permissionResult =
-      //   await ImagePicker.requestMediaLibraryPermissionsAsync();
-      // if (permissionResult.granted === false) {
-      //   alert('Permission to access camera roll is required!');
-      //   return;
-      // }
-      // let pickerResult = await ImagePicker.launchImageLibraryAsync({
-      //   mediaTypes: ImagePicker.MediaTypeOptions.Videos,
-      //   allowsEditing: true,
-      //   allowsMultipleSelection: true,
-      //   aspect: [9, 16],
-      // });
-      // if (pickerResult.cancelled === true) {
-      //   return;
-      // }
-      // this.setState({selectedVideo: pickerResult.uri});
+      launchImageLibrary({mediaType: 'video', selectionLimit: 0}, response => {
+        if (response.assets) {
+          this.setState({selectedVideo: response.assets[0].uri});
+        }
+      });
     };
     return (
       <View style={styles.container}>
@@ -85,10 +76,7 @@ export default class ChooseVideo extends React.Component {
                   shouldPlay={this.state.shouldPlay}
                   resizeMode="contain"
                   isLooping
-                  onPlaybackStatusUpdate={status =>
-                    //this.setState({ status: status })
-                    console.log(status)
-                  }
+                  onPlaybackRateChange={data => {}}
                 />
               </TouchableOpacity>
             </View>

@@ -1,6 +1,6 @@
-export const UserLogin = (token) => {
+export const UserLogin = token => {
   return {
-    type: "LOGIN",
+    type: 'LOGIN',
     payload: token,
   };
 };

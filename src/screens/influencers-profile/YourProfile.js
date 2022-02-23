@@ -29,15 +29,22 @@ import {UserApi} from '../../axios';
 import Loader from '../../constants/Loader';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
-import api from '../../api';
 
 class TabBar extends React.Component {
   constructor(props) {
     super(props);
   }
+
   render() {
     return (
-      <View style={{...styles.row}}>
+      <View
+        style={{
+          ...styles.row,
+          justifyContent: 'space-between',
+          backgroundColor: '#F2F7FD',
+          marginHorizontal: 30,
+          marginVertical: 20,
+        }}>
         <TouchableOpacity
           style={{
             width: width / 3 - 20,
@@ -127,6 +134,7 @@ export default class YourProfile extends Component {
       this.setState({auth: user.toString()});
       this.setState({userId: userId});
     }
+
     this.getInfluencerDetails();
     this.focusListener = this.props.navigation.addListener('focus', () => {
       this.getInfluencerDetails();
@@ -143,18 +151,18 @@ export default class YourProfile extends Component {
           this.setState({imageData: element.data});
         });
 
-        console.log(this.state.imageData);
         this.setState({loader: false});
       })
       .catch(function (error) {
-        console.log(error.response.data);
+        // alert(error);
       });
   }
   getTextPost() {
     let axiosConfig = {
       headers: {
         'Content-Type': 'multipart/form-data',
-        Authorization: `Bearer ${this.state.auth}`,
+        Authorization:
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWJlZTJjMzg3Nzg1ZjA5NzljY2ZiY2EiLCJlbWFpbCI6InRhbWFuQDEyMy5nbWFpbC5jb20iLCJtb2JpbGUiOiI3MDA3MzMyNzI3IiwiaWF0IjoxNjQxNjI0OTc0LCJleHAiOjE2NDQyMTY5NzR9.7DYVd6nVLLpi1-nGsOwE7pudxfkcTN1gHZTFarMQdAQ',
       },
     };
     var url =
@@ -165,15 +173,17 @@ export default class YourProfile extends Component {
       .get(url, axiosConfig)
       .then(response => {
         let data = response.data.Data;
+
         let arr = this.state.textData;
         data.forEach(element => {
           // arr.push({ id: element._id });
           arr.push({id: element._id, desc: element.desc});
         });
+
         this.setState({textData: arr});
       })
       .catch(function (error) {
-        console.log(error?.response, 'Error');
+        // alert(error);
       });
   }
 
@@ -186,34 +196,27 @@ export default class YourProfile extends Component {
         });
       })
       .catch(function (error) {
-        console.log(error.response.data);
+        // alert(error);
       });
   }
   async getInfluencerDetails() {
     let user = await AsyncStorage.getItem('userData');
-    const token = JSON.parse(await AsyncStorage.getItem('userToken'));
     let jsonUser = JSON.parse(user);
-    const id = await AsyncStorage.getItem('userId');
-    await api
-      .get(`inflncr/getInfluencerDetails/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+
+    UserApi.getUserDetails(jsonUser._id)
       .then(response => {
         if (response.data.Data.profile_image != undefined) {
           this.setState({
             profile_image: response.data.Data.profile_image.url,
           });
         }
-
+        this.setState({loader: false});
         this.setState({influencerDetails: response.data.Data});
+
         this.getImagePost();
         this.getVideoPost();
       })
-      .catch(function (error) {
-        console.log(error.response);
-      });
+      .catch(function () {});
   }
 
   renderTextPost = item => {
@@ -318,9 +321,7 @@ export default class YourProfile extends Component {
           }
           useNativeDriver={true}
           initialState={CollapsibleNavBarState.open}
-          onChangeState={state => {
-            console.log(state);
-          }}>
+          onChangeState={state => {}}>
           {this.state.selectedTab == 1 && (
             <MasonryList
               images={this.state.imageData}
@@ -369,7 +370,6 @@ export default class YourProfile extends Component {
               <View>
                 {this.state.selectedTab == 2 ? (
                   <Video
-                    paused={true}
                     style={{
                       alignSelf: 'center',
                       width: width - 60,

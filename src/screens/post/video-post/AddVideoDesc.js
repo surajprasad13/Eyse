@@ -38,19 +38,14 @@ export default class AddVideoDesc extends React.Component {
     };
   }
   async componentDidMount() {
-    console.log(this.state.tagList);
     const user = JSON.parse(await AsyncStorage.getItem('userToken'));
     if (user != null) {
       this.setState({token: user});
     }
 
     UserPost.getHashtags()
-      .then(res => {
-        console.log(res.data);
-      })
-      .catch(error => {
-        console.log(error.response);
-      });
+      .then(res => {})
+      .catch(error => {});
   }
   publishValidation = () => {
     if (this.state.desc != '' && this.state.tags != '') {
@@ -118,18 +113,13 @@ export default class AddVideoDesc extends React.Component {
             },
           )
           .then(async response => {
-            console.log(response.data);
             if (response.status == 200) {
               this.props.navigation.navigate('ProfileTabNavigator');
             }
           })
-          .catch(function (error) {
-            console.log(error.response);
-          });
+          .catch(function (error) {});
       })
-      .catch(error => {
-        console.log(error.response);
-      });
+      .catch(error => {});
   };
   render() {
     let openImagePickerAsync = async () => {

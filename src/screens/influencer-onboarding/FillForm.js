@@ -163,10 +163,7 @@ export default class FillForm extends React.Component {
 
   addMoreLinks = num => {
     var i = 0;
-
-    // console.log(i);
     for (i; i < num; i++) {
-      console.log(i);
       return <SocialMediaLinks />;
     }
   };
@@ -192,7 +189,6 @@ export default class FillForm extends React.Component {
     let jsonUser = JSON.parse(user);
 
     if (user != null) {
-      console.log(jsonUser.name);
     }
 
     axios
@@ -224,21 +220,14 @@ export default class FillForm extends React.Component {
       })
       .then(response => {
         if (response.status == 201) {
-          console.log(response);
           this.props.navigation.navigate('ProfileTabNavigator');
         }
       })
       .catch(async function (error) {
         if (error.response) {
-          // Request made and server responded
-          console.log(error.response.data);
           alert(error.response.data.message);
         } else if (error.request) {
-          // The request was made but no response was received
-          console.log(error.request, 'request error');
         } else {
-          // Something happened in setting up the request that triggered an Error
-          console.log('Error', error.message);
         }
       });
   };
