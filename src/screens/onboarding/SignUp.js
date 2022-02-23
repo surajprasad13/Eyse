@@ -74,7 +74,6 @@ export default class SignUp extends Component {
     axios
       .post(url, postData, axiosConfig)
       .then(res => {
-        console.log('RESPONSE RECEIVED: ', res);
         // this.setState({ allInfluencer: res.data.Data });
 
         if (res.status == 201) {
@@ -83,8 +82,6 @@ export default class SignUp extends Component {
         this.setState({loader: false});
       })
       .catch(err => {
-        console.log('AXIOS ERROR: ', err.response);
-
         if (err.response.data.message != null) {
           alert(err.response.data.message);
         }

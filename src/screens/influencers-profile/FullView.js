@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import { View, Image, Dimensions, SafeAreaView, StatusBar } from "react-native";
-import styles from "../post/styles";
-const width = Dimensions.get("window").width;
-const height = Dimensions.get("window").height;
+import React, {Component} from 'react';
+import {View, Image, Dimensions, SafeAreaView, StatusBar} from 'react-native';
+import styles from '../post/styles';
+
+const {width, height} = Dimensions.get('screen');
 
 export default class FullView extends Component {
   constructor(props) {
@@ -13,18 +13,16 @@ export default class FullView extends Component {
   }
 
   render() {
-    console.log(this.props.route.params.image);
     return (
       <View style={styles.container}>
         <SafeAreaView
           style={{
             marginTop: StatusBar.currentHeight + 10,
-            alignItems: "center",
-          }}
-        >
+            alignItems: 'center',
+          }}>
           <Image
-            source={{ uri: this.state.uri }}
-            style={{ width: width, height: height }}
+            source={{uri: this.state.uri}}
+            style={{width: width, height: height}}
           />
         </SafeAreaView>
       </View>

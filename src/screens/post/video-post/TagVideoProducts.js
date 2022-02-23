@@ -306,7 +306,6 @@ export default class TagVideoProducts extends React.Component {
       isSearchText: false,
       tagList: this.state.tagList.concat([newView]),
     });
-    console.log('===tagList==', this.state.tagList);
   }
   removeUser(user) {
     let tempUser = this.state.tagList;
@@ -450,10 +449,7 @@ export default class TagVideoProducts extends React.Component {
                     shouldPlay={this.state.shouldPlay}
                     resizeMode="contain"
                     isLooping
-                    onPlaybackStatusUpdate={status =>
-                      //this.setState({ status: status })
-                      console.log(status)
-                    }
+                    onPlaybackStatusUpdate={data => {}}
                   />
                 </TouchableWithoutFeedback>
                 {this.state.tagList.map(list => (

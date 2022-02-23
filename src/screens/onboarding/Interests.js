@@ -1,27 +1,24 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, {Component} from 'react';
 import {
-  Text,
-  View,
-  StatusBar,
-  TouchableOpacity,
-  Image,
-  FlatList,
   Dimensions,
+  FlatList,
   ImageBackground,
+  StatusBar,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import Feather from 'react-native-vector-icons/Feather';
+import {connect} from 'react-redux';
+import InterestsData from '../../constants/InterestsData';
+import {UserLogin} from '../../store/actions/authActions';
 import styles from './styles';
 
-const width = Dimensions.get('window').width;
-const height = Dimensions.get('window').height;
-import InterestsData from '../../constants/InterestsData';
-
-import {UserLogin} from '../../store/actions';
-
+import Feather from 'react-native-vector-icons/Feather';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import {connect} from 'react-redux';
+
+const width = Dimensions.get('window').width;
 
 class Interests extends Component {
   constructor(props) {
@@ -34,13 +31,11 @@ class Interests extends Component {
     };
   }
   async componentDidMount() {
-    // console.log("authToken: " + this.props.token);
     try {
       const value = await AsyncStorage.getItem('userToken');
       if (value !== null) {
         this.setState({token: value});
       } else {
-        console.log('token not found');
       }
     } catch (e) {
       // error reading value
@@ -67,6 +62,7 @@ class Interests extends Component {
   };
 
   render() {
+    // eslint-disable-next-line no-unused-vars
     const renderCity = ({index, item}) => {
       return (
         <TouchableOpacity
@@ -169,7 +165,7 @@ class Interests extends Component {
 }
 
 const mapStateToProps = state => {
-  return {token: state.AuthReducers.authToken};
+  return {token: state.auth.authToken};
 };
 const mapDispatchToProps = {
   UserLogin,

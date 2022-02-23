@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   SafeAreaView,
   Text,
@@ -8,16 +8,16 @@ import {
   Dimensions,
   TextInput,
   ScrollView,
-} from "react-native";
-import styles from "../styles";
-import InputFormField from "../../onboarding/components/InputFormField";
-import axios from "axios";
-import { ActivityIndicator } from "react-native-paper";
-import { UserPost } from "../../../axios";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+} from 'react-native';
+import styles from '../styles';
+import InputFormField from '../../onboarding/components/InputFormField';
+import axios from 'axios';
+import {ActivityIndicator} from 'react-native-paper';
+import {UserPost} from '../../../axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const width = Dimensions.get("window").width;
-const height = Dimensions.get("window").height;
+const width = Dimensions.get('window').width;
+const height = Dimensions.get('window').height;
 
 export default class AddDesc extends React.Component {
   constructor(props) {
@@ -25,61 +25,56 @@ export default class AddDesc extends React.Component {
     this.state = {
       selectedImage: this.props.route.params.selectedImage,
       tagList: this.props.route.params.tagList,
-      desc: "",
-      tags: "",
+      desc: '',
+      tags: '',
       loading: false,
       token: null,
-      url: "",
+      url: '',
     };
   }
   async componentDidMount() {
-    console.log(this.state.tagList);
-    const user = JSON.parse(await AsyncStorage.getItem("userToken"));
+    const user = JSON.parse(await AsyncStorage.getItem('userToken'));
     if (user != null) {
-      this.setState({ token: user });
+      this.setState({token: user});
     }
 
     UserPost.getHashtags()
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((error) => {
-        console.log(error.response);
-      });
+      .then(res => {})
+      .catch(error => {});
   }
   publishValidation = () => {
-    if (this.state.desc != "" && this.state.tags != "") {
+    if (this.state.desc != '' && this.state.tags != '') {
       return true;
     } else return false;
   };
   onSubmit = () => {
-    this.setState({ loading: true });
+    this.setState({loading: true});
     let uri = this.state.selectedImage.toString();
-    let filename = uri.split("/").pop();
+    let filename = uri.split('/').pop();
     let match = /\.(\w+)$/.exec(filename);
     let type = match ? `image/${match[1]}` : `image`;
 
     let formdata = new FormData();
-    formdata.append("content", {
+    formdata.append('content', {
       uri: uri,
       name: filename,
       type: type,
     });
 
     UserPost.uploadFile(formdata)
-      .then((res) => {
-        this.setState({ url: res.data.url });
+      .then(res => {
+        this.setState({url: res.data.url});
 
         axios
           .post(
-            "http://18.190.154.188:9000/inflncr/addInfluencerPosts",
+            'http://18.190.154.188:9000/inflncr/addInfluencerPosts',
 
             {
-              type: "IMAGE",
+              type: 'IMAGE',
               description:
-                "https://featureventures-storage.s3.us-east-2.amazonaws.com/images/1635358998782gLYYZnSeA.mp4",
+                'https://featureventures-storage.s3.us-east-2.amazonaws.com/images/1635358998782gLYYZnSeA.mp4',
               caption: this.state.desc,
-              hashtags: ["ggfddf", "gffgfdg", "gfdgfd", "gdfgfd"],
+              hashtags: ['ggfddf', 'gffgfdg', 'gfdgfd', 'gdfgfd'],
               data: [
                 {
                   name: filename,
@@ -88,90 +83,84 @@ export default class AddDesc extends React.Component {
               ],
               products: [
                 {
-                  name: "sun glasses",
-                  brand_name: "Raybon",
-                  color: "Red",
-                  size: "XXL",
-                  category: "Wearable",
-                  sub_category: "Glasses",
+                  name: 'sun glasses',
+                  brand_name: 'Raybon',
+                  color: 'Red',
+                  size: 'XXL',
+                  category: 'Wearable',
+                  sub_category: 'Glasses',
                 },
                 {
-                  name: "T- shirt",
-                  brand_name: "Raybon",
-                  color: "Red",
-                  size: "XXL",
-                  category: "Clothings",
-                  sub_category: "T-shirt",
+                  name: 'T- shirt',
+                  brand_name: 'Raybon',
+                  color: 'Red',
+                  size: 'XXL',
+                  category: 'Clothings',
+                  sub_category: 'T-shirt',
                 },
               ],
             },
             {
               headers: {
                 Authorization: this.state.token,
-                "Content-Type": "application/json",
+                'Content-Type': 'application/json',
               },
-            }
+            },
           )
-          .then(async (response) => {
-            console.log(response.data);
+          .then(async response => {
             if (response.status == 200) {
-              this.props.navigation.navigate("HomeTabNavigator");
+              this.props.navigation.navigate('HomeTabNavigator');
             }
           })
-          .catch(function (error) {
-            console.log(error.response);
-          });
+          .catch(function (error) {});
       })
-      .catch((error) => {
-        console.log(error.response);
-      });
+      .catch(error => {});
   };
   render() {
     return (
       <ScrollView style={styles.container}>
-        <SafeAreaView style={{ ...styles.headerWrapper }}>
+        <SafeAreaView style={{...styles.headerWrapper}}>
           <TouchableOpacity
             onPress={() => {
               this.props.navigation.goBack();
-            }}
-          >
+            }}>
             <Image
-              source={require("../../../assets/icons/back.png")}
-              style={{ width: 24, height: 24 }}
+              source={require('../../../assets/icons/back.png')}
+              style={{width: 24, height: 24}}
             />
           </TouchableOpacity>
-          <Text style={{ ...styles.primaryLTextBold, marginLeft: 10 }}>
+          <Text style={{...styles.primaryLTextBold, marginLeft: 10}}>
             Create a new post
           </Text>
         </SafeAreaView>
 
-        <View style={{ flex: 1, margin: 30 }}>
-          <View style={{ ...styles.row, justifyContent: "space-between" }}>
-            <Text style={{ ...styles.primaryMTextBold }}>Add description</Text>
-            <Text style={{ ...styles.primaryMTextBold }}>3/3</Text>
+        <View style={{flex: 1, margin: 30}}>
+          <View style={{...styles.row, justifyContent: 'space-between'}}>
+            <Text style={{...styles.primaryMTextBold}}>Add description</Text>
+            <Text style={{...styles.primaryMTextBold}}>3/3</Text>
           </View>
 
           <TextInput
             style={{
               height: height / 2,
-              backgroundColor: "#F2F7FD",
+              backgroundColor: '#F2F7FD',
               borderRadius: 5,
               padding: 10,
               fontSize: 16,
               marginVertical: 10,
-              textAlignVertical: "top",
+              textAlignVertical: 'top',
               ...styles.secondarySText,
             }}
-            onChangeText={(text) => {
-              this.setState({ desc: text });
+            onChangeText={text => {
+              this.setState({desc: text});
             }}
             multiline={true}
             placeholder="Write something..."
           />
 
           <InputFormField
-            onChangeText={(text) => {
-              this.setState({ tags: text });
+            onChangeText={text => {
+              this.setState({tags: text});
             }}
             label="Tags"
             placeholder="Enter hashtags here"
@@ -187,18 +176,16 @@ export default class AddDesc extends React.Component {
               paddingVertical: 10,
               marginVertical: 30,
               opacity: this.state.loading && 0.5,
-            }}
-          >
+            }}>
             {this.state.loading ? (
               <ActivityIndicator size="small" color="white" />
             ) : (
               <Text
                 style={{
                   ...styles.primaryMTextBold,
-                  color: "white",
-                  textAlign: "center",
-                }}
-              >
+                  color: 'white',
+                  textAlign: 'center',
+                }}>
                 Publish
               </Text>
             )}

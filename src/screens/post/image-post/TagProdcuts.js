@@ -308,7 +308,6 @@ export default class TagProducts extends React.Component {
       isSearchText: false,
       tagList: this.state.tagList.concat([newView]),
     });
-    console.log('===tagList==', this.state.tagList);
   }
   removeUser(user) {
     let tempUser = this.state.tagList;

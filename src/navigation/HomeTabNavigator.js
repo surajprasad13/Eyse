@@ -54,12 +54,10 @@ export default class HomeTabNavigator extends React.Component {
       axios
         .get(url, axiosConfig)
         .then(res => {
-          console.log('RESPONSE RECEIVED: ', res.data);
           this.setState({expert: res.data.Data.if_expert});
           this.setState({loading: false});
         })
         .catch(err => {
-          console.log('AXIOS ERROR: ', err.response.data);
           this.setState({loading: false});
         });
     }
