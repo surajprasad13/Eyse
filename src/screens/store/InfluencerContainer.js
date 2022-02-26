@@ -195,8 +195,8 @@ const InfluencerContainer = ({route, navigation}) => {
   );
 };
 
-const fontRegular = 'DidactGothic_400Regular';
-const fontMedium = 'NotoSans_400Regular';
+const fontRegular = 'DidactGothic-Regular';
+const fontMedium = 'PTSans-Regular';
 
 export default InfluencerContainer;
 

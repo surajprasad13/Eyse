@@ -223,6 +223,7 @@ const FilterModal = () => {
                   }}>
                   {colors.map((item, index) => (
                     <View
+                      key={index}
                       style={{
                         marginVertical: 5,
                         width: width * 0.85,
@@ -419,9 +420,9 @@ const FilterModal = () => {
   );
 };
 
-const fontRegular = 'DidactGothic_400Regular';
-const fontMedium = 'NotoSans_400Regular';
-const fontBold = 'NotoSans_700Bold';
+const fontRegular = 'DidactGothic-Regular';
+const fontMedium = 'PTSans-Regular';
+const fontBold = 'PTSans-Bold';
 
 export default FilterModal;
 

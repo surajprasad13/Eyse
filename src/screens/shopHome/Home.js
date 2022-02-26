@@ -1,7 +1,7 @@
 import MasonryList from '@react-native-seoul/masonry-list';
 import axios from 'axios';
 import React, {useEffect} from 'react';
-import {ScrollView, StyleSheet, View} from 'react-native';
+import {SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {
   getAgeListfromApi,
@@ -86,24 +86,28 @@ const Home = ({navigation}) => {
     );
   };
   return (
-    <View style={{backgroundColor: '#fff', flex: 1}}>
-      <ScrollView showsVerticalScrollIndicator={false} style={styles.container}>
-        <HomeHeader />
-        <SearchBar navigation={navigation} />
-        <MasonryList
-          keyPrefix={item => toString(item._id)}
-          numColumns={2}
-          style={{marginBottom: 80, backgroundColor: '#fff'}}
+    <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
+      <View style={{backgroundColor: '#fff', flex: 1}}>
+        <ScrollView
           showsVerticalScrollIndicator={false}
-          data={ProductsData}
-          renderItem={_renderProductItem}
-          ListEmptyComponent={null}
-        />
-      </ScrollView>
-      <View style={styles.bottomIcon}>
-        <SmartSearchIcon navigation={navigation} />
+          style={styles.container}>
+          <HomeHeader />
+          <SearchBar navigation={navigation} />
+          <MasonryList
+            keyPrefix={item => toString(item._id)}
+            numColumns={2}
+            style={{marginBottom: 80, backgroundColor: '#fff'}}
+            showsVerticalScrollIndicator={false}
+            data={ProductsData}
+            renderItem={_renderProductItem}
+            ListEmptyComponent={null}
+          />
+        </ScrollView>
+        <View style={styles.bottomIcon}>
+          <SmartSearchIcon navigation={navigation} />
+        </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

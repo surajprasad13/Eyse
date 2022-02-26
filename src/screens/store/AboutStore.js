@@ -184,9 +184,9 @@ const AboutStore = ({navigation}) => {
 
 export default AboutStore;
 
-const fontRegular = 'DidactGothic_400Regular';
-const fontMedium = 'NotoSans_400Regular';
-const fontBold = 'NotoSans_700Bold';
+const fontRegular = 'DidactGothic-Regular';
+const fontMedium = 'PTSans-Regular';
+const fontBold = 'PTSans-Bold';
 
 const {width, height} = Dimensions.get('screen');
 

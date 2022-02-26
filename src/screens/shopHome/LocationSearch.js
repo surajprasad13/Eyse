@@ -4,6 +4,7 @@ import {
   Dimensions,
   FlatList,
   Modal,
+  SafeAreaView,
   StyleSheet,
   Text,
   TextInput,
@@ -41,7 +42,7 @@ const LocationSerach = ({navigation}) => {
   };
 
   useEffect(() => {
-    Geolocation.getCurrentPositionAsync(location => {
+    Geolocation.getCurrentPosition(location => {
       setLocation(location);
     });
 
@@ -64,247 +65,249 @@ const LocationSerach = ({navigation}) => {
     </TouchableOpacity>
   );
   return (
-    <View
-      style={{
-        paddingTop: 30,
-        paddingHorizontal: 15,
-        flex: 1,
-        backgroundColor: '#fff',
-      }}>
-      <Modal
-        transparent={true}
-        animationType={'fade'}
-        onRequestClose={() => setLocationModal(false)}
-        visible={locationModal}>
-        <View style={styles.container}>
-          <View style={styles.modal}>
-            <Text style={styles.question}>What are you looking for?</Text>
-            <TextInput
-              style={styles.textInput}
-              placeholder={'Search for your Item'}
-              placeholderTextColor={'#011E46'}
-              onChangeText={text => setVal(text)}
-            />
-            <Text style={styles.question}>Where are your looking?</Text>
-            <TextInput
-              style={styles.textInput}
-              placeholder={'Enter Your Pincode'}
-              placeholderTextColor={'#011E46'}
-            />
-            <Text style={styles.OR}>OR</Text>
-            <TouchableOpacity
-              onPress={() => fetchLocation()}
-              style={styles.locationButton}>
-              <MaterialIcons name="my-location" size={24} color={'#011E46'} />
-              <Text style={styles.currentLocationText}>
-                Use my Current Location
-              </Text>
-            </TouchableOpacity>
-            {loading ? (
-              <ActivityIndicator
-                size={32}
-                color={'cyan'}
-                style={{marginTop: 30, alignSelf: 'center'}}
+    <SafeAreaView style={{flex: 1}}>
+      <View
+        style={{
+          paddingTop: 30,
+          paddingHorizontal: 15,
+          flex: 1,
+          backgroundColor: '#fff',
+        }}>
+        <Modal
+          transparent={true}
+          animationType={'fade'}
+          onRequestClose={() => setLocationModal(false)}
+          visible={locationModal}>
+          <View style={styles.container}>
+            <View style={styles.modal}>
+              <Text style={styles.question}>What are you looking for?</Text>
+              <TextInput
+                style={styles.textInput}
+                placeholder={'Search for your Item'}
+                placeholderTextColor={'#011E46'}
+                onChangeText={text => setVal(text)}
               />
-            ) : (
+              <Text style={styles.question}>Where are your looking?</Text>
+              <TextInput
+                style={styles.textInput}
+                placeholder={'Enter Your Pincode'}
+                placeholderTextColor={'#011E46'}
+              />
+              <Text style={styles.OR}>OR</Text>
               <TouchableOpacity
-                onPress={() => setLocationModal(false)}
-                style={styles.submitButton}>
-                <Text style={styles.submitText}>Submit</Text>
+                onPress={() => fetchLocation()}
+                style={styles.locationButton}>
+                <MaterialIcons name="my-location" size={24} color={'#011E46'} />
+                <Text style={styles.currentLocationText}>
+                  Use my Current Location
+                </Text>
               </TouchableOpacity>
-            )}
+              {loading ? (
+                <ActivityIndicator
+                  size={32}
+                  color={'cyan'}
+                  style={{marginTop: 30, alignSelf: 'center'}}
+                />
+              ) : (
+                <TouchableOpacity
+                  onPress={() => setLocationModal(false)}
+                  style={styles.submitButton}>
+                  <Text style={styles.submitText}>Submit</Text>
+                </TouchableOpacity>
+              )}
+            </View>
           </View>
-        </View>
-      </Modal>
-      <Modal
-        transparent={true}
-        animationType={'fade'}
-        onRequestClose={() => setChangeLocationModal(false)}
-        visible={changeLocationModal}>
-        <View
-          style={{
-            ...styles.container,
-            width: 350,
-            height: 400,
-            alignItems: 'center',
-            alignSelf: 'center',
-            justifyContent: 'center',
-          }}>
+        </Modal>
+        <Modal
+          transparent={true}
+          animationType={'fade'}
+          onRequestClose={() => setChangeLocationModal(false)}
+          visible={changeLocationModal}>
           <View
             style={{
-              ...styles.modalList,
-              width: 300,
+              ...styles.container,
+              width: 350,
               height: 400,
-              borderRadius: 8,
-              elevation: 10,
-              backgroundColor: 'white',
+              alignItems: 'center',
+              alignSelf: 'center',
+              justifyContent: 'center',
             }}>
-            <Text style={styles.question}>Change Location</Text>
-            <TextInput
-              style={styles.textInput}
-              placeholder={'Enter Your Pincode'}
-              placeholderTextColor={'#011E46'}
-            />
-            <Text style={styles.OR}>OR</Text>
-            <TouchableOpacity
-              onPress={() => fetchLocation()}
+            <View
               style={{
-                ...styles.locationButton,
-                width: WIDTH * 0.7,
-                borderRadius: 16,
+                ...styles.modalList,
+                width: 300,
+                height: 400,
+                borderRadius: 8,
+                elevation: 10,
+                backgroundColor: 'white',
               }}>
-              <MaterialIcons name="my-location" size={24} color={'#011E46'} />
-              <Text style={styles.currentLocationText}>
-                Use my Current Location
-              </Text>
-            </TouchableOpacity>
-            {loading ? (
-              <ActivityIndicator
-                size={32}
-                color={'cyan'}
-                style={{marginTop: 30, alignSelf: 'center'}}
+              <Text style={styles.question}>Change Location</Text>
+              <TextInput
+                style={styles.textInput}
+                placeholder={'Enter Your Pincode'}
+                placeholderTextColor={'#011E46'}
               />
-            ) : (
+              <Text style={styles.OR}>OR</Text>
               <TouchableOpacity
-                onPress={() => setChangeLocationModal(false)}
-                style={styles.submitButton}>
-                <Text style={styles.submitText}>Submit</Text>
+                onPress={() => fetchLocation()}
+                style={{
+                  ...styles.locationButton,
+                  width: WIDTH * 0.7,
+                  borderRadius: 16,
+                }}>
+                <MaterialIcons name="my-location" size={24} color={'#011E46'} />
+                <Text style={styles.currentLocationText}>
+                  Use my Current Location
+                </Text>
               </TouchableOpacity>
-            )}
+              {loading ? (
+                <ActivityIndicator
+                  size={32}
+                  color={'cyan'}
+                  style={{marginTop: 30, alignSelf: 'center'}}
+                />
+              ) : (
+                <TouchableOpacity
+                  onPress={() => setChangeLocationModal(false)}
+                  style={styles.submitButton}>
+                  <Text style={styles.submitText}>Submit</Text>
+                </TouchableOpacity>
+              )}
+            </View>
           </View>
-        </View>
-      </Modal>
-      <Modal
-        transparent={true}
-        animationType={'fade'}
-        onRequestClose={() => setListModal(false)}
-        visible={listModal}>
-        <View
-          style={{
-            ...styles.container,
-            width: 150,
-            height: 300,
-            alignItems: 'center',
-            alignSelf: 'flex-start',
-            justifyContent: 'flex-start',
-            margin: 20,
-            marginTop: 30,
-          }}>
+        </Modal>
+        <Modal
+          transparent={true}
+          animationType={'fade'}
+          onRequestClose={() => setListModal(false)}
+          visible={listModal}>
           <View
             style={{
-              ...styles.modalList,
+              ...styles.container,
               width: 150,
               height: 300,
-              borderRadius: 8,
-              elevation: 10,
-              backgroundColor: 'white',
+              alignItems: 'center',
+              alignSelf: 'flex-start',
+              justifyContent: 'flex-start',
+              margin: 20,
+              marginTop: 30,
             }}>
-            <FlatList
-              data={[
-                'Frames',
-                'Hats',
-                'Clothing',
-                'Footwear',
-                'Frame',
-                'Hat',
-                'Baby Wears',
-                'Sport Wear',
-              ]}
-              keyExtractor={item => item}
-              renderItem={renderItem}
-            />
-          </View>
-        </View>
-      </Modal>
-      <View>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            paddingHorizontal: 0,
-          }}>
-          <TouchableOpacity
-            onPress={() => setListModal(true)}
-            style={styles.dropDownButton}>
-            <Text
+            <View
               style={{
-                fontSize: 16,
-                alignSelf: 'center',
-                fontFamily: typography.DidactGothicRegular,
-                color: '#015DD3',
+                ...styles.modalList,
+                width: 150,
+                height: 300,
+                borderRadius: 8,
+                elevation: 10,
+                backgroundColor: 'white',
               }}>
-              {val}
-            </Text>
-            <Octicons name="triangle-down" color={'#015DD3'} size={16} />
-          </TouchableOpacity>
-          <Text
-            onPress={() => setChangeLocationModal(true)}
-            style={styles.locationText}>
-            Change Location
-          </Text>
-        </View>
-        <View
-          style={{
-            flexDirection: 'row',
-            marginVertical: 10,
-            paddingHorizontal: 0,
-            alignItems: 'center',
-            justifyContent: 'center',
-            width: WIDTH * 0.9,
-          }}>
-          <View style={styles.searchContainer}>
-            <TouchableOpacity
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                alignSelf: 'center',
-                //paddingHorizontal: 20,
-                //backgroundColor:'red'
-              }}>
-              <View style={{marginLeft: 10}}>
-                <MaterialIcons name={'search'} size={20} color="#B3CEF2" />
-              </View>
-              <TextInput
-                placeholder={'Search'}
-                autoFocus={false}
-                placeholderTextColor={'#677890'}
-                style={styles.searchTextInput}
+              <FlatList
+                data={[
+                  'Frames',
+                  'Hats',
+                  'Clothing',
+                  'Footwear',
+                  'Frame',
+                  'Hat',
+                  'Baby Wears',
+                  'Sport Wear',
+                ]}
+                keyExtractor={item => item}
+                renderItem={renderItem}
               />
+            </View>
+          </View>
+        </Modal>
+        <View>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              paddingHorizontal: 0,
+            }}>
+            <TouchableOpacity
+              onPress={() => setListModal(true)}
+              style={styles.dropDownButton}>
+              <Text
+                style={{
+                  fontSize: 16,
+                  alignSelf: 'center',
+                  fontFamily: typography.DidactGothicRegular,
+                  color: '#015DD3',
+                }}>
+                {val}
+              </Text>
+              <Octicons name="triangle-down" color={'#015DD3'} size={16} />
             </TouchableOpacity>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <Text
+              onPress={() => setChangeLocationModal(true)}
+              style={styles.locationText}>
+              Change Location
+            </Text>
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              marginVertical: 10,
+              paddingHorizontal: 0,
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: WIDTH * 0.9,
+            }}>
+            <View style={styles.searchContainer}>
               <TouchableOpacity
-                onPress={() => navigation.navigate('cameraSearch')}>
-                <MaterialIcons
-                  name={'camera-alt'}
-                  color={'#015DD3'}
-                  size={20}
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  alignSelf: 'center',
+                  //paddingHorizontal: 20,
+                  //backgroundColor:'red'
+                }}>
+                <View style={{marginLeft: 10}}>
+                  <MaterialIcons name={'search'} size={20} color="#B3CEF2" />
+                </View>
+                <TextInput
+                  placeholder={'Search'}
+                  autoFocus={false}
+                  placeholderTextColor={'#677890'}
+                  style={styles.searchTextInput}
                 />
               </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => navigation.navigate('TextToSpeech')}
-                style={styles.ttsIcon}>
-                <MaterialCommunityIcons
-                  name={'microphone'}
-                  size={20}
-                  color={'#015DD3'}
-                />
+              <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <TouchableOpacity
+                  onPress={() => navigation.navigate('cameraSearch')}>
+                  <MaterialIcons
+                    name={'camera-alt'}
+                    color={'#015DD3'}
+                    size={20}
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => navigation.navigate('TextToSpeech')}
+                  style={styles.ttsIcon}>
+                  <MaterialCommunityIcons
+                    name={'microphone'}
+                    size={20}
+                    color={'#015DD3'}
+                  />
+                </TouchableOpacity>
+              </View>
+            </View>
+            <View style={styles.filterContainer}>
+              <TouchableOpacity>
+                <MaterialIcons name={'filter-list'} color={'black'} size={24} />
+              </TouchableOpacity>
+              <TouchableOpacity>
+                <MaterialIcons name={'sort'} color={'black'} size={24} />
               </TouchableOpacity>
             </View>
           </View>
-          <View style={styles.filterContainer}>
-            <TouchableOpacity>
-              <MaterialIcons name={'filter-list'} color={'black'} size={24} />
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <MaterialIcons name={'sort'} color={'black'} size={24} />
-            </TouchableOpacity>
-          </View>
+        </View>
+        <View style={styles.smartIcon}>
+          <SmartSearchIcon navigation={navigation} />
         </View>
       </View>
-      <View style={styles.smartIcon}>
-        <SmartSearchIcon navigation={navigation} />
-      </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

@@ -172,7 +172,8 @@ export default class HomeScreen extends Component {
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => {
-                  this.props.navigation.navigate('YourBooking');
+                  const path = 'YourBooking';
+                  this.props.navigation.navigate(path, {through: 'home'});
                 }}>
                 <AntDesign name="calendar" size={25} color={colors.primary} />
               </TouchableOpacity>

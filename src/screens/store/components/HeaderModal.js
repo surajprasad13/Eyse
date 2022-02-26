@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useState} from 'react';
 import {
   Dimensions,
   Image,
@@ -6,11 +6,11 @@ import {
   Text,
   TouchableOpacity,
   View,
-} from "react-native";
+} from 'react-native';
 
-const { width } = Dimensions.get("screen");
+const {width} = Dimensions.get('screen');
 
-const HeaderModal = ({ opened, navigation }) => {
+const HeaderModal = ({opened, navigation}) => {
   const [isOpened, setIsOpened] = useState(opened);
   return (
     <View>
@@ -18,24 +18,21 @@ const HeaderModal = ({ opened, navigation }) => {
         <Modal
           transparent={true}
           visible={isOpened}
-          style={{ flex: 1, backgroundColor: "transparent" }}
-        >
+          style={{flex: 1, backgroundColor: 'transparent'}}>
           <View
             style={{
               width: width,
-              backgroundColor: "rgba(1,30,70,0.7)",
+              backgroundColor: 'rgba(1,30,70,0.7)',
               padding: 20,
-            }}
-          >
+            }}>
             <View
               style={{
-                flexDirection: "row",
+                flexDirection: 'row',
 
                 width: width,
-                justifyContent: "space-between",
-              }}
-            >
-              <View style={{ flexDirection: "row" }}>
+                justifyContent: 'space-between',
+              }}>
+              <View style={{flexDirection: 'row'}}>
                 <Image
                   style={{
                     height: 50,
@@ -43,35 +40,33 @@ const HeaderModal = ({ opened, navigation }) => {
                     marginRight: 30,
                     borderRadius: 50,
                   }}
-                  source={require("../../assets/images/img3.png")}
+                  source={require('../../assets/images/img3.png')}
                 />
-                <View style={{ alignSelf: "center" }}>
+                <View style={{alignSelf: 'center'}}>
                   <Text
                     style={{
-                      color: "#F2F7FD",
+                      color: '#F2F7FD',
                       fontSize: 16,
                       fontFamily: fontBold,
-                    }}
-                  >
+                    }}>
                     Influencers Name
                   </Text>
-                  <View style={{ flexDirection: "row" }}>
+                  <View style={{flexDirection: 'row'}}>
                     <Text
                       style={{
-                        color: "#F2F7FD",
+                        color: '#F2F7FD',
                         fontSize: 14,
                         fontFamily: fontBold,
-                      }}
-                    >
+                      }}>
                       Follow
                     </Text>
                     <TouchableOpacity onPress={() => setIsOpened(false)}>
                       <Image
-                        source={require("../../assets/images/arrow-up.png")}
+                        source={require('../../assets/images/arrow-up.png')}
                         style={{
                           height: 22,
                           width: 22,
-                          alignSelf: "center",
+                          alignSelf: 'center',
                           marginHorizontal: 10,
                         }}
                       />
@@ -80,36 +75,34 @@ const HeaderModal = ({ opened, navigation }) => {
                 </View>
               </View>
               <Image
-                source={require("../../assets/images/more_vertical.png")}
-                style={{ height: 28, width: 28, alignSelf: "center", right: 0 }}
+                source={require('../../assets/images/more_vertical.png')}
+                style={{height: 28, width: 28, alignSelf: 'center', right: 0}}
               />
             </View>
             <Text
               style={{
-                color: "#F2F7FD",
+                color: '#F2F7FD',
                 fontSize: 14,
                 fontFamily: fontRegular,
-              }}
-            >
+              }}>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. In
               molestie, ante id tincidunt dapibus... Lorem ipsum dolor sit amet,
               consectetur adipiscing elit. In molestie, ante id tincidunt
               dapibus...
             </Text>
-            <View style={{ flexDirection: "row", marginTop: 10 }}>
+            <View style={{flexDirection: 'row', marginTop: 10}}>
               <Image
-                source={require("../../assets/images/profile-icon.png")}
-                style={{ height: 28, width: 28, alignSelf: "center", right: 0 }}
+                source={require('../../assets/images/profile-icon.png')}
+                style={{height: 28, width: 28, alignSelf: 'center', right: 0}}
               />
               <Text
                 style={{
-                  alignSelf: "center",
-                  color: "#fff",
+                  alignSelf: 'center',
+                  color: '#fff',
                   fontSize: 14,
                   fontFamily: fontRegular,
-                }}
-              >
-                {" "}
+                }}>
+                {' '}
                 2 Products
               </Text>
             </View>
@@ -119,29 +112,27 @@ const HeaderModal = ({ opened, navigation }) => {
         <Modal
           transparent={true}
           visible={!isOpened}
-          style={{ flex: 1, backgroundColor: "transparent" }}
-        >
+          style={{flex: 1, backgroundColor: 'transparent'}}>
           <View
             style={{
-              flexDirection: "row",
+              flexDirection: 'row',
               padding: 20,
               width: width,
-              justifyContent: "space-between",
+              justifyContent: 'space-between',
               //backgroundColor: 'rgba(1,30,70,0.7)',
-            }}
-          >
+            }}>
             <TouchableOpacity onPress={() => navigation.goBack()}>
               <Image
                 style={{
                   height: 28,
                   width: 28,
-                  alignSelf: "center",
+                  alignSelf: 'center',
                   marginTop: 10,
                 }}
-                source={require("../../assets/images/back-arrow-icon.png")}
+                source={require('../../assets/images/back-arrow-icon.png')}
               />
             </TouchableOpacity>
-            <View style={{ flexDirection: "row", marginLeft: -40 }}>
+            <View style={{flexDirection: 'row', marginLeft: -40}}>
               <Image
                 style={{
                   height: 50,
@@ -149,35 +140,33 @@ const HeaderModal = ({ opened, navigation }) => {
                   marginHorizontal: 30,
                   borderRadius: 50,
                 }}
-                source={require("../../assets/images/img3.png")}
+                source={require('../../assets/images/img3.png')}
               />
-              <View style={{ alignSelf: "center" }}>
+              <View style={{alignSelf: 'center'}}>
                 <Text
                   style={{
-                    color: "#F2F7FD",
+                    color: '#F2F7FD',
                     fontSize: 16,
                     fontFamily: fontBold,
-                  }}
-                >
+                  }}>
                   Influencers Name
                 </Text>
-                <View style={{ flexDirection: "row" }}>
+                <View style={{flexDirection: 'row'}}>
                   <Text
                     style={{
-                      color: "#F2F7FD",
+                      color: '#F2F7FD',
                       fontSize: 14,
                       fontFamily: fontBold,
-                    }}
-                  >
+                    }}>
                     Follow
                   </Text>
                   <TouchableOpacity onPress={() => setIsOpened(true)}>
                     <Image
-                      source={require("../../assets/images/arrow-down.png")}
+                      source={require('../../assets/images/arrow-down.png')}
                       style={{
                         height: 22,
                         width: 22,
-                        alignSelf: "center",
+                        alignSelf: 'center',
                         marginHorizontal: 10,
                       }}
                     />
@@ -186,8 +175,8 @@ const HeaderModal = ({ opened, navigation }) => {
               </View>
             </View>
             <Image
-              source={require("../../assets/images/more_vertical.png")}
-              style={{ height: 28, width: 28, alignSelf: "center", right: 0 }}
+              source={require('../../assets/images/more_vertical.png')}
+              style={{height: 28, width: 28, alignSelf: 'center', right: 0}}
             />
           </View>
         </Modal>
@@ -195,8 +184,10 @@ const HeaderModal = ({ opened, navigation }) => {
     </View>
   );
 };
-const fontRegular = "DidactGothic_400Regular";
-const fontBold = "NotoSans_700Bold";
+
+const fontRegular = 'DidactGothic-Regular';
+const fontBold = 'PTSans-Bold';
+
 export default HeaderModal;
 
 {

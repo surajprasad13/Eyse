@@ -4,7 +4,7 @@ export const typography = {
   NotoSansExtraBold: 'PTSans-Bold',
   NotoSansExtraLight: 'PTSans-Regular',
   NotoSansLight: 'PTSans-Light',
-  NotoSansMedium: 'PTSans-Medium',
+  NotoSansMedium: 'PTSans-Regular',
   NotoSansRegular: 'PTSans-Regular',
   NotoSansSemiBold: 'PTSans-Bold',
   NotoSansThin: 'PTSans-Thin',

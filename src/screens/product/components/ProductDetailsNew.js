@@ -4,6 +4,7 @@ import {
   FlatList,
   Image,
   Modal,
+  SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
@@ -208,279 +209,198 @@ const ProductDetailsNew = props => {
   };
 
   return (
-    <View style={{backgroundColor: '#fff', flex: 1}}>
-      {visible ? <Header /> : null}
+    <SafeAreaView style={{flex: 1}}>
+      <View style={{backgroundColor: '#fff', flex: 1}}>
+        {visible ? <Header /> : null}
 
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        style={{zIndex: -1}}
-        ref={scrollRef}
-        onScroll={event => {
-          setOffSet(event.nativeEvent.contentOffset.y);
-        }}>
-        <View
-          onLayout={event => {
-            var {height} = event.nativeEvent.layout;
-            setHeight(height);
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          style={{zIndex: -1}}
+          ref={scrollRef}
+          onScroll={event => {
+            setOffSet(event.nativeEvent.contentOffset.y);
           }}>
-          <View style={styles.header}>
-            <TouchableNativeFeedback
-              onPress={() => {
-                props.goBack();
-              }}
-              background={TouchableNativeFeedback.Ripple('#E6E8EC', true)}>
-              <View style={styles.iconBtn}>
-                <Image
-                  source={require('../../../assets/images/back-arrow-icon.png')}
-                  style={styles.icon24}
-                  resizeMode="contain"
-                />
-              </View>
-            </TouchableNativeFeedback>
-
-            <Text style={styles.headerTitle}>
-              {props.product.prdct_attributes.prdct_name} -{' '}
-              {props.product.prdct_attributes.brand}
-            </Text>
-
-            <TouchableNativeFeedback
-              background={TouchableNativeFeedback.Ripple('#E6E8EC', true)}>
-              <View style={styles.iconBtn}>
-                <Image
-                  source={require('../../../assets/images/share.png')}
-                  style={styles.icon24}
-                  resizeMode="contain"
-                />
-              </View>
-            </TouchableNativeFeedback>
-          </View>
-
           <View
-            onLayout={event => setHeight1(event.nativeEvent.layout.height)}
-            style={styles.card}>
-            <View style={styles.imageContainer}>
-              <Carousel
-                data={props.product.prdct_attributes.media}
-                renderItem={renderImageItem}
-                sliderWidth={width}
-                itemWidth={width}
-                onSnapToItem={index => setActiveSlider(index)}
-              />
+            onLayout={event => {
+              var {height} = event.nativeEvent.layout;
+              setHeight(height);
+            }}>
+            <View style={styles.header}>
+              <TouchableNativeFeedback
+                onPress={() => {
+                  props.goBack();
+                }}
+                background={TouchableNativeFeedback.Ripple('#E6E8EC', true)}>
+                <View style={styles.iconBtn}>
+                  <Image
+                    source={require('../../../assets/images/back-arrow-icon.png')}
+                    style={styles.icon24}
+                    resizeMode="contain"
+                  />
+                </View>
+              </TouchableNativeFeedback>
 
-              <PaginationCard
-                dotsLength={props.product.prdct_attributes.media.length}
-                activeDot={activeSlide}
-              />
+              <Text style={styles.headerTitle}>
+                {props.product.prdct_attributes.prdct_name} -{' '}
+                {props.product.prdct_attributes.brand}
+              </Text>
+
+              <TouchableNativeFeedback
+                background={TouchableNativeFeedback.Ripple('#E6E8EC', true)}>
+                <View style={styles.iconBtn}>
+                  <Image
+                    source={require('../../../assets/images/share.png')}
+                    style={styles.icon24}
+                    resizeMode="contain"
+                  />
+                </View>
+              </TouchableNativeFeedback>
             </View>
 
-            <TouchableOpacity
-              onPress={() => setLiked(!liked)}
-              style={styles.floatingActionBtn}>
+            <View
+              onLayout={event => setHeight1(event.nativeEvent.layout.height)}
+              style={styles.card}>
+              <View style={styles.imageContainer}>
+                <Carousel
+                  data={props.product.prdct_attributes.media}
+                  renderItem={renderImageItem}
+                  sliderWidth={width}
+                  itemWidth={width}
+                  onSnapToItem={index => setActiveSlider(index)}
+                />
+
+                <PaginationCard
+                  dotsLength={props.product.prdct_attributes.media.length}
+                  activeDot={activeSlide}
+                />
+              </View>
+
+              <TouchableOpacity
+                onPress={() => setLiked(!liked)}
+                style={styles.floatingActionBtn}>
+                <Image
+                  source={
+                    liked
+                      ? require('../../../assets/images/heart-fill.png')
+                      : require('../../../assets/images/heart-outline.png')
+                  }
+                  style={{...styles.icon28, top: 2}}
+                  resizeMode="contain"
+                />
+              </TouchableOpacity>
+              <FlatList
+                showsHorizontalScrollIndicator={false}
+                style={{marginBottom: -20}}
+                data={props.colors}
+                keyExtractor={item => item.id}
+                renderItem={renderColorCirles}
+                horizontal
+              />
+            </View>
+          </View>
+          <View onLayout={event => setHeight2(event.nativeEvent.layout.height)}>
+            {!visible ? <Header /> : null}
+
+            <View style={styles.iconBtnBox}>
+              <TouchableOpacity
+                activeOpacity={0.6}
+                onPress={() => {
+                  setSizeModal(true);
+                }}
+                style={styles.iconBtnContainer}>
+                <View style={styles.iconBg}></View>
+                <Text style={styles.iconBtnLabel}>Variant</Text>
+              </TouchableOpacity>
+
+              <View style={styles.iconBtnContainer}>
+                <View style={styles.iconBg}>
+                  <View style={styles.elementsInRow}>
+                    <Text style={styles.textSmall}>{props.product.rating}</Text>
+                    <Image
+                      source={require('../../../assets/images/star-yellow.png')}
+                      style={{...styles.icon16, marginBottom: 3}}
+                      resizeMode="contain"
+                    />
+                  </View>
+                </View>
+                <Text style={styles.iconBtnLabel}>Rating</Text>
+              </View>
+            </View>
+
+            <View
+              style={{
+                ...styles.elementsInRow,
+                alignSelf: 'center',
+                marginBottom: 15,
+              }}>
               <Image
-                source={
-                  liked
-                    ? require('../../../assets/images/heart-fill.png')
-                    : require('../../../assets/images/heart-outline.png')
-                }
-                style={{...styles.icon28, top: 2}}
+                source={require('../../../assets/images/retry.png')}
+                style={styles.icon42}
                 resizeMode="contain"
               />
-            </TouchableOpacity>
-            <FlatList
-              showsHorizontalScrollIndicator={false}
-              style={{marginBottom: -20}}
-              data={props.colors}
-              keyExtractor={item => item.id}
-              renderItem={renderColorCirles}
-              horizontal
-            />
-          </View>
-        </View>
-        <View onLayout={event => setHeight2(event.nativeEvent.layout.height)}>
-          {!visible ? <Header /> : null}
+              <Text style={styles.textMedium}>7 days return</Text>
+            </View>
 
-          <View style={styles.iconBtnBox}>
-            <TouchableOpacity
-              activeOpacity={0.6}
-              onPress={() => {
-                setSizeModal(true);
-              }}
-              style={styles.iconBtnContainer}>
-              <View style={styles.iconBg}></View>
-              <Text style={styles.iconBtnLabel}>Variant</Text>
-            </TouchableOpacity>
+            <View style={{marginHorizontal: 15}}>
+              <View style={styles.uiDivider} />
 
-            <View style={styles.iconBtnContainer}>
-              <View style={styles.iconBg}>
-                <View style={styles.elementsInRow}>
-                  <Text style={styles.textSmall}>{props.product.rating}</Text>
+              <View style={{...styles.elementsInRowJSB, marginTop: 20}}>
+                <View>
+                  <View style={styles.elementsInRow}>
+                    <Text style={styles.productPrice}>
+                      ₹ {props.product.prdct_attributes.dsct_price.toFixed(2)}
+                    </Text>
+                    <Text style={styles.productPriceMRP}>
+                      {' '}
+                      {props.product.prdct_attributes.original_price}{' '}
+                    </Text>
+                  </View>
+                  <View style={styles.elementsInRow}>
+                    <Text style={styles.priceMembers}>
+                      ₹ {props.product.member_discount}
+                    </Text>
+                    <Text
+                      style={{
+                        ...styles.priceMembers,
+                        fontFamily: fontRegular,
+                        marginBottom: 3,
+                      }}>
+                      {' '}
+                      for members
+                    </Text>
+                  </View>
+                </View>
+
+                <View style={styles.becomeMemberBtn}>
+                  <Text style={{...styles.textMedium, color: '#011E46'}}>
+                    Become a member
+                  </Text>
                   <Image
-                    source={require('../../../assets/images/star-yellow.png')}
-                    style={{...styles.icon16, marginBottom: 3}}
+                    source={require('../../../assets/images/forward-arrow.png')}
+                    style={styles.icon20}
                     resizeMode="contain"
                   />
                 </View>
               </View>
-              <Text style={styles.iconBtnLabel}>Rating</Text>
+
+              <Text style={styles.offerText}>50% OFF</Text>
+            </View>
+
+            <View style={styles.estimatedTimeContainer}>
+              <Image
+                source={require('../../../assets/images/add.png')}
+                style={{...styles.icon42, marginRight: 8}}
+                resizeMode="contain"
+              />
+              <Text style={{...styles.textMedium, color: '#677890'}}>
+                Estimated Delivary time 6-7 days
+              </Text>
             </View>
           </View>
-
           <View
-            style={{
-              ...styles.elementsInRow,
-              alignSelf: 'center',
-              marginBottom: 15,
-            }}>
-            <Image
-              source={require('../../../assets/images/retry.png')}
-              style={styles.icon42}
-              resizeMode="contain"
-            />
-            <Text style={styles.textMedium}>7 days return</Text>
-          </View>
-
-          <View style={{marginHorizontal: 15}}>
-            <View style={styles.uiDivider} />
-
-            <View style={{...styles.elementsInRowJSB, marginTop: 20}}>
-              <View>
-                <View style={styles.elementsInRow}>
-                  <Text style={styles.productPrice}>
-                    ₹ {props.product.prdct_attributes.dsct_price.toFixed(2)}
-                  </Text>
-                  <Text style={styles.productPriceMRP}>
-                    {' '}
-                    {props.product.prdct_attributes.original_price}{' '}
-                  </Text>
-                </View>
-                <View style={styles.elementsInRow}>
-                  <Text style={styles.priceMembers}>
-                    ₹ {props.product.member_discount}
-                  </Text>
-                  <Text
-                    style={{
-                      ...styles.priceMembers,
-                      fontFamily: fontRegular,
-                      marginBottom: 3,
-                    }}>
-                    {' '}
-                    for members
-                  </Text>
-                </View>
-              </View>
-
-              <View style={styles.becomeMemberBtn}>
-                <Text style={{...styles.textMedium, color: '#011E46'}}>
-                  Become a member
-                </Text>
-                <Image
-                  source={require('../../../assets/images/forward-arrow.png')}
-                  style={styles.icon20}
-                  resizeMode="contain"
-                />
-              </View>
-            </View>
-
-            <Text style={styles.offerText}>50% OFF</Text>
-          </View>
-
-          <View style={styles.estimatedTimeContainer}>
-            <Image
-              source={require('../../../assets/images/add.png')}
-              style={{...styles.icon42, marginRight: 8}}
-              resizeMode="contain"
-            />
-            <Text style={{...styles.textMedium, color: '#677890'}}>
-              Estimated Delivary time 6-7 days
-            </Text>
-          </View>
-        </View>
-        <View
-          onLayout={event => setHeight3(event.nativeEvent.layout.height)}
-          style={styles.sectionBox}>
-          <Text style={styles.sectionTitle}>Description</Text>
-          <Text style={styles.sectionDescription}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. In
-            molestie, ante id tincidunt dapibus, justo eros imperdiet Lorem
-            ipsum dolor sit amet, consectetur adipiscing elit. In molestie, ante
-            id tincidunt dapibus, justo eros imperdiet
-          </Text>
-
-          <TouchableOpacity onPress={() => {}}>
-            <Text style={styles.readMoreBtn}>Read more...</Text>
-          </TouchableOpacity>
-          <TouchableNativeFeedback
-            onPress={() => {
-              setShopModal(true);
-            }}>
-            <View style={styles.viewShopBtn}>
-              <Text style={styles.viewShopBtnText}>Visit Shop</Text>
-            </View>
-          </TouchableNativeFeedback>
-          <TouchableNativeFeedback onPress={() => {}}>
-            <View
-              style={{
-                ...styles.viewShopBtn,
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                padding: 15,
-                backgroundColor: '#F2F7FD',
-                height: 72,
-                width: width - 20,
-                alignSelf: 'center',
-                paddingLeft: 31,
-              }}>
-              <View>
-                <Text style={{...styles.harvestText, color: '#373737'}}>
-                  Do not have sufficient funds?{' '}
-                </Text>
-                <Text style={styles.harvestText}>Try Harvest</Text>
-              </View>
-              <View>
-                <Image
-                  source={require('../../../assets/images/forward-arrow.png')}
-                  style={{width: 25, height: 25, alignSelf: 'center'}}
-                />
-              </View>
-            </View>
-          </TouchableNativeFeedback>
-        </View>
-        {showReview ? (
-          <View
-            onLayout={event => setHeight4(event.nativeEvent.layout.height)}
-            style={{
-              ...styles.sectionBox,
-              backgroundColor: '#fff',
-              elevation: 5,
-              width: width - 20,
-              alignSelf: 'center',
-              paddingHorizontal: 20,
-              paddingVertical: 20,
-            }}>
-            <View style={styles.elementsInRowJSB}>
-              <Text style={styles.sectionTitle}>Reviews</Text>
-
-              <TouchableOpacity
-                onPress={() => {
-                  setShowReview(!showReview);
-                }}
-                style={styles.filterDropdown}>
-                <Ionicons
-                  name={'chevron-up-outline'}
-                  size={32}
-                  color={'#011E46'}
-                />
-              </TouchableOpacity>
-            </View>
-
-            <View style={{...styles.elementsInRow, marginTop: 6}}>
-              <Text style={styles.text16}>Naveen</Text>
-              <View style={{...styles.elementsInRow, marginLeft: 6}}>
-                <Text style={styles.text16}>4.5</Text>
-                <RatingsDisplay numStars={4} />
-              </View>
-            </View>
-
+            onLayout={event => setHeight3(event.nativeEvent.layout.height)}
+            style={styles.sectionBox}>
+            <Text style={styles.sectionTitle}>Description</Text>
             <Text style={styles.sectionDescription}>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. In
               molestie, ante id tincidunt dapibus, justo eros imperdiet Lorem
@@ -491,352 +411,435 @@ const ProductDetailsNew = props => {
             <TouchableOpacity onPress={() => {}}>
               <Text style={styles.readMoreBtn}>Read more...</Text>
             </TouchableOpacity>
-
-            <View style={{...styles.uiDivider, marginTop: 24}} />
-          </View>
-        ) : (
-          <View
-            onLayout={event => setHeight4(event.nativeEvent.layout.height)}
-            style={{
-              ...styles.sectionBox,
-
-              backgroundColor: '#fff',
-              alignSelf: 'center',
-              //justifyContent: 'center',
-              paddingVertical: 20,
-              paddingHorizontal: 20,
-              width: width - 20,
-            }}>
-            <View style={styles.elementsInRowJSB}>
-              <Text style={styles.sectionTitle}>Reviews</Text>
-
-              <TouchableOpacity
-                onPress={() => {
-                  setShowReview(!showReview);
-                }}
-                style={styles.filterDropdown}>
-                <Ionicons
-                  name={'chevron-down-outline'}
-                  size={32}
-                  color={'#011E46'}
-                />
-              </TouchableOpacity>
-            </View>
-          </View>
-        )}
-        <Modal
-          animationType="node"
-          transparent={true}
-          visible={sizeModal}
-          onDismiss={() => setSizeModal(false)}
-          onRequestClose={() => {
-            setSizeModal(false);
-          }}>
-          <TouchableOpacity
-            onPress={() => setSizeModal(false)}
-            style={styles.modalContainer}>
-            <View />
-
-            <View>
-              <View style={styles.uiBox} />
-              <View style={styles.modalCard}>
-                <Text style={styles.modalTitle}>
-                  Select size & varient you want to buy
-                </Text>
-
-                <View style={{marginTop: 18, paddingBottom: 30}}>
-                  <FlatList
-                    data={productSize.Data}
-                    renderItem={renderSizeCirles}
-                    keyExtractor={item => {
-                      item._id;
-                    }}
-                    horizontal
-                    showsHorizontalScrollIndicator={false}
+            <TouchableNativeFeedback
+              onPress={() => {
+                setShopModal(true);
+              }}>
+              <View style={styles.viewShopBtn}>
+                <Text style={styles.viewShopBtnText}>Visit Shop</Text>
+              </View>
+            </TouchableNativeFeedback>
+            <TouchableNativeFeedback onPress={() => {}}>
+              <View
+                style={{
+                  ...styles.viewShopBtn,
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  padding: 15,
+                  backgroundColor: '#F2F7FD',
+                  height: 72,
+                  width: width - 20,
+                  alignSelf: 'center',
+                  paddingLeft: 31,
+                }}>
+                <View>
+                  <Text style={{...styles.harvestText, color: '#373737'}}>
+                    Do not have sufficient funds?{' '}
+                  </Text>
+                  <Text style={styles.harvestText}>Try Harvest</Text>
+                </View>
+                <View>
+                  <Image
+                    source={require('../../../assets/images/forward-arrow.png')}
+                    style={{width: 25, height: 25, alignSelf: 'center'}}
                   />
                 </View>
               </View>
-            </View>
-          </TouchableOpacity>
-        </Modal>
-
-        <Modal
-          transparent={true}
-          visible={shopModal}
-          onDismiss={() => setShopModal(false)}>
-          <TouchableOpacity
-            onPress={() => setShopModal(false)}
-            style={styles.modalContainer}>
+            </TouchableNativeFeedback>
+          </View>
+          {showReview ? (
             <View
+              onLayout={event => setHeight4(event.nativeEvent.layout.height)}
               style={{
+                ...styles.sectionBox,
+                backgroundColor: '#fff',
+                elevation: 5,
+                width: width - 20,
+                alignSelf: 'center',
+                paddingHorizontal: 20,
+                paddingVertical: 20,
+              }}>
+              <View style={styles.elementsInRowJSB}>
+                <Text style={styles.sectionTitle}>Reviews</Text>
+
+                <TouchableOpacity
+                  onPress={() => {
+                    setShowReview(!showReview);
+                  }}
+                  style={styles.filterDropdown}>
+                  <Ionicons
+                    name={'chevron-up-outline'}
+                    size={32}
+                    color={'#011E46'}
+                  />
+                </TouchableOpacity>
+              </View>
+
+              <View style={{...styles.elementsInRow, marginTop: 6}}>
+                <Text style={styles.text16}>Naveen</Text>
+                <View style={{...styles.elementsInRow, marginLeft: 6}}>
+                  <Text style={styles.text16}>4.5</Text>
+                  <RatingsDisplay numStars={4} />
+                </View>
+              </View>
+
+              <Text style={styles.sectionDescription}>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In
+                molestie, ante id tincidunt dapibus, justo eros imperdiet Lorem
+                ipsum dolor sit amet, consectetur adipiscing elit. In molestie,
+                ante id tincidunt dapibus, justo eros imperdiet
+              </Text>
+
+              <TouchableOpacity onPress={() => {}}>
+                <Text style={styles.readMoreBtn}>Read more...</Text>
+              </TouchableOpacity>
+
+              <View style={{...styles.uiDivider, marginTop: 24}} />
+            </View>
+          ) : (
+            <View
+              onLayout={event => setHeight4(event.nativeEvent.layout.height)}
+              style={{
+                ...styles.sectionBox,
+
                 backgroundColor: '#fff',
                 alignSelf: 'center',
-                flex: 1,
-                padding: 20,
-                alignItems: 'center',
-                justifyContent: 'space-around',
+                //justifyContent: 'center',
+                paddingVertical: 20,
+                paddingHorizontal: 20,
+                width: width - 20,
               }}>
-              <Text
-                style={{
-                  fontFamily: fontRegular,
-                  fontSize: 20,
-                  color: '#011E46',
-                }}>
-                Visit the store
-              </Text>
-              <Text
-                style={{
-                  textAlign: 'center',
-                  fontFamily: fontMedium,
-                  color: '#677890',
-                  fontSize: 14,
-                  margin: 15,
-                }}>
-                And choose from wide varieties that are available and get your
-                eye testing done.{' '}
-              </Text>
+              <View style={styles.elementsInRowJSB}>
+                <Text style={styles.sectionTitle}>Reviews</Text>
+
+                <TouchableOpacity
+                  onPress={() => {
+                    setShowReview(!showReview);
+                  }}
+                  style={styles.filterDropdown}>
+                  <Ionicons
+                    name={'chevron-down-outline'}
+                    size={32}
+                    color={'#011E46'}
+                  />
+                </TouchableOpacity>
+              </View>
+            </View>
+          )}
+          <Modal
+            animationType="node"
+            transparent={true}
+            visible={sizeModal}
+            onDismiss={() => setSizeModal(false)}
+            onRequestClose={() => {
+              setSizeModal(false);
+            }}>
+            <TouchableOpacity
+              onPress={() => setSizeModal(false)}
+              style={styles.modalContainer}>
+              <View />
+
+              <View>
+                <View style={styles.uiBox} />
+                <View style={styles.modalCard}>
+                  <Text style={styles.modalTitle}>
+                    Select size & varient you want to buy
+                  </Text>
+
+                  <View style={{marginTop: 18, paddingBottom: 30}}>
+                    <FlatList
+                      data={productSize.Data}
+                      renderItem={renderSizeCirles}
+                      keyExtractor={item => {
+                        item._id;
+                      }}
+                      horizontal
+                      showsHorizontalScrollIndicator={false}
+                    />
+                  </View>
+                </View>
+              </View>
+            </TouchableOpacity>
+          </Modal>
+
+          <Modal
+            transparent={true}
+            visible={shopModal}
+            onDismiss={() => setShopModal(false)}>
+            <TouchableOpacity
+              onPress={() => setShopModal(false)}
+              style={styles.modalContainer}>
               <View
                 style={{
-                  height: 160,
-                  backgroundColor: '#F2F7FD',
-                  borderRadius: 7,
-                  padding: 15,
-                  width: 250,
-                  justifyContent: 'space-between',
+                  backgroundColor: '#fff',
+                  alignSelf: 'center',
+                  flex: 1,
+                  padding: 20,
+                  alignItems: 'center',
+                  justifyContent: 'space-around',
                 }}>
+                <Text
+                  style={{
+                    fontFamily: fontRegular,
+                    fontSize: 20,
+                    color: '#011E46',
+                  }}>
+                  Visit the store
+                </Text>
+                <Text
+                  style={{
+                    textAlign: 'center',
+                    fontFamily: fontMedium,
+                    color: '#677890',
+                    fontSize: 14,
+                    margin: 15,
+                  }}>
+                  And choose from wide varieties that are available and get your
+                  eye testing done.{' '}
+                </Text>
                 <View
                   style={{
-                    flexDirection: 'row',
+                    height: 160,
+                    backgroundColor: '#F2F7FD',
+                    borderRadius: 7,
+                    padding: 15,
+                    width: 250,
                     justifyContent: 'space-between',
                   }}>
-                  <Text style={styles.storeText}>Store name</Text>
-                  <Text style={styles.storeText}>4.5 ⭐</Text>
-                </View>
-                <View style={{flexDirection: 'row'}}>
-                  <Ionicons
-                    name={'location-sharp'}
-                    color={'#677890'}
-                    size={20}
-                  />
-                  <Text
+                  <View
                     style={{
-                      fontFamily: fontRegular,
-                      color: '#677890',
-                      fontSize: 14,
+                      flexDirection: 'row',
+                      justifyContent: 'space-between',
                     }}>
-                    Street name, Area, City
-                  </Text>
-                </View>
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                  }}>
-                  <View style={styles.verifiedButton}>
-                    <Text style={styles.verified}>Verified</Text>
+                    <Text style={styles.storeText}>Store name</Text>
+                    <Text style={styles.storeText}>4.5 ⭐</Text>
                   </View>
                   <View style={{flexDirection: 'row'}}>
-                    <Text
-                      style={{
-                        fontFamily: fontRegular,
-                        color: '#011E46',
-                        fontSize: 14,
-                      }}>
-                      4 km.
-                    </Text>
+                    <Ionicons
+                      name={'location-sharp'}
+                      color={'#677890'}
+                      size={20}
+                    />
                     <Text
                       style={{
                         fontFamily: fontRegular,
                         color: '#677890',
                         fontSize: 14,
                       }}>
-                      {' '}
-                      10 mins
+                      Street name, Area, City
                     </Text>
                   </View>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      justifyContent: 'space-between',
+                    }}>
+                    <View style={styles.verifiedButton}>
+                      <Text style={styles.verified}>Verified</Text>
+                    </View>
+                    <View style={{flexDirection: 'row'}}>
+                      <Text
+                        style={{
+                          fontFamily: fontRegular,
+                          color: '#011E46',
+                          fontSize: 14,
+                        }}>
+                        4 km.
+                      </Text>
+                      <Text
+                        style={{
+                          fontFamily: fontRegular,
+                          color: '#677890',
+                          fontSize: 14,
+                        }}>
+                        {' '}
+                        10 mins
+                      </Text>
+                    </View>
+                  </View>
                 </View>
+                <TouchableOpacity
+                  onPress={() => setShopModal(false)}
+                  style={{
+                    ...styles.storeButton,
+                    backgroundColor: '#fff',
+                    elevation: 4,
+                  }}>
+                  <Text
+                    style={{
+                      fontFamily: fontRegular,
+                      fontSize: 16,
+                      color: '#011E46',
+                    }}>
+                    Book an appointment
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.storeButton}>
+                  <Text
+                    style={{
+                      fontFamily: fontRegular,
+                      fontSize: 16,
+                      color: '#fff',
+                    }}>
+                    Visit Now
+                  </Text>
+                </TouchableOpacity>
               </View>
-              <TouchableOpacity
-                onPress={() => setShopModal(false)}
-                style={{
-                  ...styles.storeButton,
-                  backgroundColor: '#fff',
-                  elevation: 4,
-                }}>
-                <Text
-                  style={{
-                    fontFamily: fontRegular,
-                    fontSize: 16,
-                    color: '#011E46',
-                  }}>
-                  Book an appointment
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.storeButton}>
-                <Text
-                  style={{
-                    fontFamily: fontRegular,
-                    fontSize: 16,
-                    color: '#fff',
-                  }}>
-                  Visit Now
-                </Text>
-              </TouchableOpacity>
-            </View>
-          </TouchableOpacity>
-        </Modal>
-
-        <TouchableOpacity
-          onPress={() => {
-            props.navigation.navigate('AboutStore');
-          }}
-          style={{
-            ...styles.sectionBox,
-            backgroundColor: '#fff',
-            alignSelf: 'center',
-            //justifyContent: 'center',
-            paddingVertical: 20,
-            paddingHorizontal: 20,
-            width: width - 20,
-            borderRadius: 5,
-          }}>
-          <View style={styles.elementsInRowJSB}>
-            <Text style={styles.sectionTitle}>About Store</Text>
-
-            <TouchableOpacity
-              onPress={() => {
-                props.navigation.navigate('AboutStore');
-              }}
-              style={styles.filterDropdown}>
-              <Ionicons name="chevron-forward" size={32} color={'#011E46'} />
             </TouchableOpacity>
-          </View>
-        </TouchableOpacity>
-
-        <View style={{...styles.cardHeader, marginTop: 30, marginBottom: 15}}>
-          <Text style={{...styles.cardTitle, color: '#015DD3'}}>
-            Similar Products
-          </Text>
+          </Modal>
 
           <TouchableOpacity
             onPress={() => {
-              props.navigation.navigate('Home', {screen: true});
-            }}>
-            <Text style={styles.textBtnText}>View all</Text>
-          </TouchableOpacity>
-        </View>
-        {/* <SimilarProducts navigation={props.navigation} id={productId} /> */}
-        <View style={{...styles.cardHeader, marginTop: 0}}>
-          <Text style={{...styles.cardTitle, color: '#015DD3'}}>
-            Product Reviews
-          </Text>
-
-          <TouchableOpacity
-            onPress={() =>
-              props.navigation.navigate('InfluencerContainer', {
-                image: require('../../../assets/images/img1.png'),
-                type: 'image',
-              })
-            }>
-            <Text style={styles.textBtnText}>View all</Text>
-          </TouchableOpacity>
-        </View>
-
-        {influencerData.map(item => (
-          <ProductReviews
-            key={item._id}
-            name={item.name}
-            photo={{uri: item?.profile_image?.url}}
-            navigation={props.navigation}
-            type={'image'}
-            description={item.description}
-          />
-        ))}
-      </ScrollView>
-
-      <View
-        style={{
-          flexDirection: 'row',
-          height: 50,
-
-          elevation: 5,
-          backgroundColor: '#fff',
-          alignSelf: 'center',
-        }}>
-        <View
-          style={{
-            backgroundColor: '#fff',
-            flex: 0.8,
-            borderTopLeftRadius: 8,
-            alignItems: 'center',
-            flexDirection: 'row',
-            justifyContent: 'space-around',
-          }}>
-          <Text>Qty</Text>
-          <View
+              props.navigation.navigate('AboutStore');
+            }}
             style={{
-              width: 1,
-              backgroundColor: 'grey',
-              marginVertical: 2,
-              height: 30,
-            }}></View>
-          <View
-            style={{
-              flexDirection: 'row',
+              ...styles.sectionBox,
+              backgroundColor: '#fff',
               alignSelf: 'center',
-              justifyContent: 'space-around',
+              //justifyContent: 'center',
+              paddingVertical: 20,
+              paddingHorizontal: 20,
+              width: width - 20,
+              borderRadius: 5,
             }}>
-            <View
-              style={{
-                alignSelf: 'flex-start',
-                marginLeft: -15,
-                marginRight: 10,
-              }}>
-              <TouchableOpacity onPress={() => setQuantity(quantity + 1)}>
-                <Ionicons name="caret-up" size={35} color={'#011E46'} />
-              </TouchableOpacity>
+            <View style={styles.elementsInRowJSB}>
+              <Text style={styles.sectionTitle}>About Store</Text>
 
               <TouchableOpacity
-                onPress={() =>
-                  quantity > 0
-                    ? setQuantity(quantity - 1)
-                    : setQuantity(quantity)
-                }>
-                {/* <Image
+                onPress={() => {
+                  props.navigation.navigate('AboutStore');
+                }}
+                style={styles.filterDropdown}>
+                <Ionicons name="chevron-forward" size={32} color={'#011E46'} />
+              </TouchableOpacity>
+            </View>
+          </TouchableOpacity>
+
+          <View style={{...styles.cardHeader, marginTop: 30, marginBottom: 15}}>
+            <Text style={{...styles.cardTitle, color: '#015DD3'}}>
+              Similar Products
+            </Text>
+
+            <TouchableOpacity
+              onPress={() => {
+                props.navigation.navigate('Home', {screen: true});
+              }}>
+              <Text style={styles.textBtnText}>View all</Text>
+            </TouchableOpacity>
+          </View>
+          {/* <SimilarProducts navigation={props.navigation} id={productId} /> */}
+          <View style={{...styles.cardHeader, marginTop: 0}}>
+            <Text style={{...styles.cardTitle, color: '#015DD3'}}>
+              Product Reviews
+            </Text>
+
+            <TouchableOpacity
+              onPress={() =>
+                props.navigation.navigate('InfluencerContainer', {
+                  image: require('../../../assets/images/img1.png'),
+                  type: 'image',
+                })
+              }>
+              <Text style={styles.textBtnText}>View all</Text>
+            </TouchableOpacity>
+          </View>
+
+          {influencerData.map(item => (
+            <ProductReviews
+              key={item._id}
+              name={item.name}
+              photo={{uri: item?.profile_image?.url}}
+              navigation={props.navigation}
+              type={'image'}
+              description={item.description}
+            />
+          ))}
+        </ScrollView>
+
+        <View
+          style={{
+            flexDirection: 'row',
+            height: 50,
+
+            elevation: 5,
+            backgroundColor: '#fff',
+            alignSelf: 'center',
+          }}>
+          <View
+            style={{
+              backgroundColor: '#fff',
+              flex: 0.8,
+              borderTopLeftRadius: 8,
+              alignItems: 'center',
+              flexDirection: 'row',
+              justifyContent: 'space-around',
+            }}>
+            <Text>Qty</Text>
+            <View
+              style={{
+                width: 1,
+                backgroundColor: 'grey',
+                marginVertical: 2,
+                height: 30,
+              }}></View>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignSelf: 'center',
+                justifyContent: 'space-around',
+              }}>
+              <View
+                style={{
+                  alignSelf: 'flex-start',
+                  marginLeft: -15,
+                  marginRight: 10,
+                }}>
+                <TouchableOpacity onPress={() => setQuantity(quantity + 1)}>
+                  <Ionicons name="caret-up" size={35} color={'#011E46'} />
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  onPress={() =>
+                    quantity > 0
+                      ? setQuantity(quantity - 1)
+                      : setQuantity(quantity)
+                  }>
+                  {/* <Image
                   source={require('../../assets/images/arrow-down.png')}
                   style={{height: 18, width: 18}}
                 /> */}
-                <Ionicons name="caret-down" size={35} color={'#011E46'} />
-              </TouchableOpacity>
+                  <Ionicons name="caret-down" size={35} color={'#011E46'} />
+                </TouchableOpacity>
+              </View>
+              <Text style={{alignSelf: 'center'}}>{quantity}</Text>
             </View>
-            <Text style={{alignSelf: 'center'}}>{quantity}</Text>
           </View>
+          <TouchableOpacity
+            onPress={() => {
+              props.navigation.navigate('CartScreen');
+              cart(props.product);
+            }}
+            style={{
+              backgroundColor: '#015DD3',
+              flex: 1.5,
+              borderTopRightRadius: 8,
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+            <Text
+              style={{color: '#F2F7FD', fontSize: 14, fontFamily: fontMedium}}>
+              Add to Cart
+            </Text>
+          </TouchableOpacity>
         </View>
-        <TouchableOpacity
-          onPress={() => {
-            props.navigation.navigate('CartScreen');
-            cart(props.product);
-          }}
-          style={{
-            backgroundColor: '#015DD3',
-            flex: 1.5,
-            borderTopRightRadius: 8,
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
-          <Text
-            style={{color: '#F2F7FD', fontSize: 14, fontFamily: fontMedium}}>
-            Add to Cart
-          </Text>
-        </TouchableOpacity>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
-const fontRegular = 'DidactGothic_400Regular';
-const fontMedium = 'NotoSans_400Regular';
-const fontBold = 'NotoSans_700Bold';
+const fontRegular = 'DidactGothic-Regular';
+const fontMedium = 'PTSans-Regular';
+const fontBold = 'PTSans-Bold';
 
 const {width} = Dimensions.get('screen');
 

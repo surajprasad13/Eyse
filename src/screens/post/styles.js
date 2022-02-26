@@ -21,12 +21,12 @@ export default StyleSheet.create({
   },
   primaryMTextBold: {
     fontSize: 14,
-    fontFamily: 'NotoSans-Bold',
+    fontFamily: 'PTSans-Bold',
     color: '#011E46',
   },
   primaryLTextBold: {
     fontSize: 20,
-    fontFamily: 'NotoSans-Bold',
+    fontFamily: 'PTSans-Bold',
     color: '#011E46',
   },
   primarySText: {

@@ -9,17 +9,21 @@ import {
 } from 'react-native';
 import {typography} from '../../../common/typography';
 
+import AntDesign from 'react-native-vector-icons/AntDesign';
+
 const ProductCardVerticleNew = props => {
   const [imageHeight, setImageHeight] = React.useState(300);
   const [liked, setLiked] = React.useState(false);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  React.useEffect(async () => {
+  React.useEffect(() => {
     Image.getSize(props.image, (_width, height) => {
       setImageHeight(height);
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.image]);
+
   const ht = props.title ? 50 : 0;
+
   return (
     <TouchableOpacity
       key={props.key}
@@ -34,7 +38,14 @@ const ProductCardVerticleNew = props => {
         elevation: 5,
         backgroundColor: '#fff',
         borderRadius: 10,
-        overflow: 'hidden',
+        //overflow: 'hidden',
+        shadowColor: 'black',
+        shadowRadius: 5,
+        shadowOpacity: 0.2,
+        shadowOffset: {
+          width: 1,
+          height: 3,
+        },
         height:
           imageHeight < 300
             ? imageHeight * 0.8 + ht
@@ -60,15 +71,7 @@ const ProductCardVerticleNew = props => {
         <TouchableOpacity
           onPress={() => setLiked(!liked)}
           style={styles.floatingActionBtn}>
-          <Image
-            source={
-              liked
-                ? require('../../../assets/images/heart-fill.png')
-                : require('../../../assets/images/heart-outline.png')
-            }
-            style={{...styles.icon28, top: 2}}
-            resizeMode="contain"
-          />
+          <AntDesign name={liked ? 'heart' : 'hearto'} size={20} color="gray" />
         </TouchableOpacity>
       ) : null}
 
@@ -151,16 +154,25 @@ const styles = StyleSheet.create({
     color: '#011E46',
   },
   floatingActionBtn: {
-    width: 50,
-    height: 50,
-    borderRadius: 30,
+    width: 40,
+    height: 40,
+    borderRadius: 20,
     elevation: 15,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#fff',
     position: 'absolute',
     right: 8,
-    bottom: 25,
+    bottom: 40,
+    shadowColor: 'black',
+    shadowOpacity: 0.2,
+    shadowRadius: 10,
+    shadowOffset: {
+      width: 1,
+      height: 3,
+    },
+    overflow: 'visible',
+    zIndex: 100,
   },
 
   cardHeader: {

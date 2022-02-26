@@ -257,9 +257,9 @@ const Cart = ({navigation}) => {
     </View>
   );
 };
-const fontRegular = 'DidactGothic_400Regular';
-const fontMedium = 'NotoSans_400Regular';
-const fontBold = 'NotoSans_700Bold';
+const fontRegular = 'DidactGothic-Regular';
+const fontMedium = 'PTSans-Regular';
+const fontBold = 'PTSans-Bold';
 
 export default Cart;
 
