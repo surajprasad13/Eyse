@@ -1,4 +1,4 @@
-import moment from "moment";
+import moment from 'moment';
 
 export const getLimit = (date, limit) => {
   return moment(date).set({
@@ -14,9 +14,9 @@ export const seperateSlot = (_slots, selected_date) => {
   const afternoon = [];
   const evening = [];
 
-  _slots.map((item) => {
+  _slots.map(item => {
     const date = item.date?.[0]?.slot_start;
-    if (moment(date).isSame(moment(selected_date), "day")) {
+    if (moment(date).isSame(moment(selected_date), 'day')) {
       const morningStart = getLimit(date, 7);
       const morningEnd = getLimit(date, 12);
       const afternoonStart = getLimit(date, 12);
@@ -35,5 +35,5 @@ export const seperateSlot = (_slots, selected_date) => {
       else if (isNight) night.push(item);
     }
   });
-  return { morning, night, evening, afternoon };
+  return {morning, night, evening, afternoon};
 };

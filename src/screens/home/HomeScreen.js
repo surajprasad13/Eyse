@@ -11,24 +11,26 @@ import {
   ScrollView,
   ActivityIndicator,
 } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import Carousel, {Pagination} from 'react-native-snap-carousel';
-import axios from 'axios';
 
-// helpers
+import styles from './styles';
+import BookingsLogo from '../../assets/icons/vector.svg';
+
+import Carousel, {Pagination} from 'react-native-snap-carousel';
 import data from '../../constants/data';
+
 import ImagePostView from './components/ImagePostView';
 import VideoPostView from './components/VideoPostView';
 import TextPostView from './components/TextPostView';
-import styles from './styles';
-import {colors} from '../../theme';
-
-// icons
+import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {connect} from 'react-redux';
+import {clearUser} from '../../store/actions/authActions';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import colors from '../../constants/colors';
 
 const {width, height} = Dimensions.get('screen');
 
-export default class HomeScreen extends Component {
+export class HomeScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -48,6 +50,7 @@ export default class HomeScreen extends Component {
     this.setState({userType: userType});
     this.getAllInfluencer();
   }
+
   getAllInfluencer() {
     let axiosConfig = {
       headers: {
@@ -62,11 +65,11 @@ export default class HomeScreen extends Component {
         this.setState({allInfluencer: res.data.Data});
         this.setState({loading: false});
       })
-      .catch(err => {
+      .catch(() => {
         this.setState({loading: false});
       });
   }
-  _renderItem({item, index}) {
+  _renderItem({item}) {
     return (
       <View
         style={{
@@ -89,7 +92,7 @@ export default class HomeScreen extends Component {
           style={{
             ...styles.secondaryMText,
             textAlign: 'center',
-            color: colors.text,
+            color: '#011E46',
             width: width / 1.3,
           }}>
           Check out our latest BERG & MIYAMA Collections
@@ -99,7 +102,7 @@ export default class HomeScreen extends Component {
   }
 
   get pagination() {
-    const {entries, activeSlide} = this.state;
+    const {activeSlide} = this.state;
     return (
       <Pagination
         dotsLength={6}
@@ -148,6 +151,7 @@ export default class HomeScreen extends Component {
                 try {
                   AsyncStorage.clear();
                   alert('Logout successfull !');
+                  this.props.clearUser();
                   this.props.navigation.navigate('Login');
                 } catch (e) {
                   // clear error
@@ -175,7 +179,12 @@ export default class HomeScreen extends Component {
                   const path = 'YourBooking';
                   this.props.navigation.navigate(path, {through: 'home'});
                 }}>
-                <AntDesign name="calendar" size={25} color={colors.primary} />
+                <AntDesign
+                  name="calendar"
+                  size={25}
+                  color={colors.primaryBackground}
+                />
+                {/* <BookingsLogo /> */}
               </TouchableOpacity>
             </View>
           </SafeAreaView>
@@ -299,7 +308,7 @@ export default class HomeScreen extends Component {
         )}
         <View>
           <ImagePostView
-            id="61bee2c387785f0979ccfbca"
+            id={this.props.auth.userId}
             name="taman"
             navigation={this.props.navigation}
           />
@@ -313,3 +322,16 @@ export default class HomeScreen extends Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    auth: state.auth,
+  };
+};
+const mapDispatchToProps = dispatch => {
+  return {
+    clearUser: () => dispatch(clearUser()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);

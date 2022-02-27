@@ -1,18 +1,20 @@
 import React from 'react';
 import {Text, View, Image, SafeAreaView} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {ActivityIndicator} from 'react-native-paper';
+import axios from 'axios';
 
 // ================ CREATE TAB NAVIGATOR ================ //
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+
 import HomeScreen from '../screens/home/HomeScreen';
 import ExpertContentList from '../screens/expert-advice/ExpertContentList';
 import ProfileTabNavigator from '../screens/influencers-profile/ProfileTabNavigator';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import axios from 'axios';
-import {ActivityIndicator} from 'react-native-paper';
+import ShopStack from './ShopStack';
 
+// icons
 import Icon from 'react-native-vector-icons/Feather';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
-import ShopStack from './ShopStack';
 
 import {colors} from '../theme';
 
